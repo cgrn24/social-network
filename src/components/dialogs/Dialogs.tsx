@@ -1,12 +1,27 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import s from './dialogs.module.css'
+import s from './Dialogs.module.css'
 
-const DialogItem = (props: any) => {
+type UserType = {
+    id: number,
+    name: string
+}
+
+type MessageType = {
+    message: string
+}
+
+const DialogItem: React.FC<UserType> = (props) => {
     return (
         <div className={s.dialogs + '' + s.active}>
             <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
         </div>
+    )
+}
+
+const Message: React.FC<MessageType> = (props) => {
+    return (
+        <div>{props.message}</div>
     )
 }
 
@@ -29,13 +44,13 @@ export const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem name='User1' id='1'/>
-                <DialogItem name='User2' id='2'/>
-                <DialogItem name='User3' id='3'/>
-                <DialogItem name='User4' id='4'/>
+                <DialogItem name='User1' id={1} />
+                <DialogItem name='User2' id={2} />
+                <DialogItem name='User3' id={3} />
+                <DialogItem name='User4' id={4} />
             </div>
             <div className={s.messages}>
-                <div>Не ну а хуле</div>
+                <Message message='ёпрст' />
                 <div>
                     <div><textarea placeholder='Enter your message'></textarea></div>
                     <div><button>Send</button></div>

@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import n from './navbar.module.css'
+import n from './Navbar.module.css'
 
 export const Navbar = () => {
     return <nav className={n.nav}>

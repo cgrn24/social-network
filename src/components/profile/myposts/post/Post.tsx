@@ -1,5 +1,5 @@
 import React from 'react';
-import p from './post.module.css'
+import p from './Post.module.css'
 
 export const Post = () => {
   return (

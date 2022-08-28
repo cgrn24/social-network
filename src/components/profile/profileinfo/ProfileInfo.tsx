@@ -1,5 +1,5 @@
 import React from 'react';
-import p from './Profileinfo.module.css'
+import p from './ProfileInfo.module.css'
 
 export const ProfileInfo = () => {
   return (
