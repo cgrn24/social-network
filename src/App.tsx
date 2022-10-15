@@ -16,7 +16,7 @@ function App(props: RenderPropsType) {
         <div className='app-wrapper-content'>
           <Switch>
             <Route path='/profile'>
-              <Profile state={props.state.profilePage} addPost={props.addPost} />
+              <Profile state={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText} />
             </Route>
             <Route path='/dialogs'>
               <Dialogs state={props.state.dialogsPage} />

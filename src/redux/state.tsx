@@ -1,3 +1,4 @@
+import { StringLiteralLike } from 'typescript'
 import { rerenderEntireTree } from '../render'
 
 export type PostsType = {
@@ -18,7 +19,7 @@ export type MessagesType = {
 
 export type ProfilePageType = {
   posts: Array<PostsType>
-  newPostText: Array<string>
+  newPostText: string
 }
 
 export type DialogsPageType = {
@@ -50,7 +51,7 @@ export const state: RootStateType = {
       { id: 1, message: 'Hi, havayu', likesCount: 12 },
       { id: 2, message: 'Its my first yopta?', likesCount: 9 },
     ],
-    newPostText: [],
+    newPostText: '',
   },
   dialogsPage: {
     dialogs: [
@@ -69,12 +70,18 @@ export const state: RootStateType = {
   sidebar: {},
 }
 
-export const addPost = (postMessage: string) => {
+export const addPost = (postText: string) => {
   let newPost: PostsType = {
     id: 3,
-    message: postMessage,
+    message: state.profilePage.newPostText,
     likesCount: 100,
   }
   state.profilePage.posts.push(newPost)
+  state.profilePage.newPostText = ''
+  rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+  state.profilePage.newPostText = newText
   rerenderEntireTree(state)
 }

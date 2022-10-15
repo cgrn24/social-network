@@ -7,7 +7,6 @@ export const Post = (props: PostsType) => {
     <div className={p.item} key={props.id}>
       <img src='http://www.ljplus.ru/img4/m/u/muchaev/_zhsloe1.jpg'></img>
       {props.message}
-      <div>My post</div>
       <div>
         <span>like</span> {props.likesCount}
       </div>
