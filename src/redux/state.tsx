@@ -1,0 +1,80 @@
+import { rerenderEntireTree } from '../render'
+
+export type PostsType = {
+  id?: number
+  message: string
+  likesCount?: number
+}
+
+export type DialogsType = {
+  id: number
+  name: string
+}
+
+export type MessagesType = {
+  id: number
+  message: string
+}
+
+export type ProfilePageType = {
+  posts: Array<PostsType>
+  newPostText: Array<string>
+}
+
+export type DialogsPageType = {
+  dialogs: Array<DialogsType>
+  messages: Array<MessagesType>
+  newMessageBody: string
+}
+
+export type SidebarType = {}
+
+export type RootStateType = {
+  profilePage: ProfilePageType
+  dialogsPage: DialogsPageType
+  sidebar: SidebarType
+}
+
+// export type AddPostType = {
+//   addPost: (postMessage: string) => void
+// }
+
+// export type StateType = {
+//   state: RootStateType
+//   addPost: AddPostType
+// }
+
+export const state: RootStateType = {
+  profilePage: {
+    posts: [
+      { id: 1, message: 'Hi, havayu', likesCount: 12 },
+      { id: 2, message: 'Its my first yopta?', likesCount: 9 },
+    ],
+    newPostText: [],
+  },
+  dialogsPage: {
+    dialogs: [
+      { id: 1, name: 'Zhmykh' },
+      { id: 2, name: 'Valera' },
+      { id: 3, name: 'Pozhiloy' },
+      { id: 4, name: 'Arsen' },
+    ],
+    messages: [
+      { id: 1, message: 'Hi' },
+      { id: 2, message: 'How are you? Havaesh?' },
+      { id: 3, message: 'Yopta' },
+    ],
+    newMessageBody: '',
+  },
+  sidebar: {},
+}
+
+export const addPost = (postMessage: string) => {
+  let newPost: PostsType = {
+    id: 3,
+    message: postMessage,
+    likesCount: 100,
+  }
+  state.profilePage.posts.push(newPost)
+  rerenderEntireTree(state)
+}
