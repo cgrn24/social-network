@@ -1,32 +1,10 @@
-import React from 'react'
+import React, { ChangeEvent, ChangeEventHandler } from 'react'
 import { NavLink } from 'react-router-dom'
-import { DialogsPageType, DialogsType, MessagesType } from '../../redux/state'
+import { sendMessageAC, updateNewMessageAC } from '../../redux/dialogsReducer'
+import { DialogsType, MessagesType } from '../../redux/state'
 import { DialogItem } from './DialogItem/DialogItem'
 import s from './Dialogs.module.css'
 import { Message } from './Message/Message'
-
-// type UserType = {
-//   id: number
-//   name: string
-// }
-
-// type MessageType = {
-//   message: string
-// }
-
-// const DialogItem: React.FC<UserType> = (props) => {
-//     return (
-//         <div className={s.dialogs + '' + s.active}>
-//             <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
-//         </div>
-//     )
-// }
-
-// const Message: React.FC<MessageType> = (props) => {
-//     return (
-//         <div>{props.message}</div>
-//     )
-// }
 
 type DialogsInpageType = {
   dialogs: Array<DialogsType>
@@ -36,26 +14,20 @@ type DialogsInpageType = {
 
 type StateDialogsType = {
   state: DialogsInpageType
+  dispatch: (action: any) => void
 }
 
 export const Dialogs = (props: StateDialogsType) => {
-  // let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id} />)
-  // let messagesElements = state.messages.map(m => <Message message={m.message} />)
-  // let newMessageBody = state.newMessageBody
-
-  // let onSendMessageClick = () => {
-  //     props.store.dispatch(sendMessageCreator())
-
-  // }
-
-  // let onNewMessageChange = (e) => {
-  //     let body = e.target.value
-  //     props.store.dispatch(updateNewMessageBodyCreator(body))
-
-  // }
-
+  let newMessageBody = props.state.newMessageBody
   let dialogsElements = props.state.dialogs.map((d) => <DialogItem name={d.name} id={d.id} />)
   let messagesElements = props.state.messages.map((m) => <Message message={m.message} />)
+  let onSendMessageClick = () => {
+    props.dispatch(sendMessageAC())
+  }
+  let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const body = e.target.value
+    props.dispatch(updateNewMessageAC(body))
+  }
 
   return (
     <div className={s.dialogs}>
@@ -64,10 +36,12 @@ export const Dialogs = (props: StateDialogsType) => {
         {messagesElements}
         <div>
           <div>
-            <textarea placeholder='Enter your message'></textarea>
+            <div>
+              <textarea onChange={onNewMessageChange} value={newMessageBody} placeholder='Enter your message'></textarea>
+            </div>
           </div>
           <div>
-            <button>Send</button>
+            <button onClick={onSendMessageClick}>Send</button>
           </div>
         </div>
       </div>

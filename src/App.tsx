@@ -5,9 +5,14 @@ import { Navbar } from './components/navbar/Navbar'
 import { Profile } from './components/profile/Profile'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Dialogs } from './components/dialogs/Dialogs'
-import { RenderPropsType } from './render'
+import { RootStateType } from './redux/state'
 
-function App(props: RenderPropsType) {
+export type AppPropsType = {
+  state: RootStateType
+  dispatch: (action: any) => void
+}
+
+function App(props: AppPropsType) {
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -16,10 +21,10 @@ function App(props: RenderPropsType) {
         <div className='app-wrapper-content'>
           <Switch>
             <Route path='/profile'>
-              <Profile state={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText} />
+              <Profile state={props.state.profilePage} dispatch={props.dispatch} />
             </Route>
             <Route path='/dialogs'>
-              <Dialogs state={props.state.dialogsPage} />
+              <Dialogs state={props.state.dialogsPage} dispatch={props.dispatch} />
             </Route>
           </Switch>
         </div>

@@ -1,5 +1,4 @@
 import { StringLiteralLike } from 'typescript'
-import { rerenderEntireTree } from '../render'
 
 export type PostsType = {
   id?: number
@@ -70,18 +69,26 @@ export const state: RootStateType = {
   sidebar: {},
 }
 
-export const addPost = (postText: string) => {
-  let newPost: PostsType = {
-    id: 3,
-    message: state.profilePage.newPostText,
-    likesCount: 100,
-  }
-  state.profilePage.posts.push(newPost)
-  state.profilePage.newPostText = ''
-  rerenderEntireTree(state)
-}
+// export const addPost = (postText: string) => {
+//   let newPost: PostsType = {
+//     id: 3,
+//     message: state.profilePage.newPostText,
+//     likesCount: 100,
+//   }
+//   state.profilePage.posts.push(newPost)
+//   state.profilePage.newPostText = ''
+//   rerenderEntireTree(state)
+// }
 
-export const updateNewPostText = (newText: string) => {
-  state.profilePage.newPostText = newText
-  rerenderEntireTree(state)
-}
+// export const updateNewPostText = (newText: string) => {
+//   state.profilePage.newPostText = newText
+//   rerenderEntireTree(state)
+// }
+
+// let rerenderEntireTree = () => {
+
+// }
+
+// export const subscribe = (observer) = {
+//   rerenderEntireTree(observer)
+// }
