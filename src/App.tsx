@@ -6,10 +6,12 @@ import { Profile } from './components/profile/Profile'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Dialogs } from './components/dialogs/Dialogs'
 import { RootStateType } from './redux/state'
+import { RootStoreType, StoreType } from './redux/store'
 
 export type AppPropsType = {
   state: RootStateType
   dispatch: (action: any) => void
+  store: StoreType
 }
 
 function App(props: AppPropsType) {
@@ -21,7 +23,7 @@ function App(props: AppPropsType) {
         <div className='app-wrapper-content'>
           <Switch>
             <Route path='/profile'>
-              <Profile state={props.state.profilePage} dispatch={props.dispatch} />
+              <Profile store={props.store} />
             </Route>
             <Route path='/dialogs'>
               <Dialogs state={props.state.dialogsPage} dispatch={props.dispatch} />

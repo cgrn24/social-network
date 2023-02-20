@@ -11,11 +11,11 @@ const reducers = combineReducers({
 })
 
 export type StoreType = {
-  state: RootStateType
-  changeNewText: (newText: string) => void
-  addPost: (postText: string) => void
-  onChange: () => void
-  subscribe: (callback: () => void) => void
+  state?: RootStateType
+  changeNewText?: (newText: string) => void
+  addPost?: (postText: string) => void
+  onChange?: () => void
+  subscribe?: (callback: () => void) => void
   getState: () => RootStateType
   dispatch: (action: any) => void
 }

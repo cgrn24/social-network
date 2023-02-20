@@ -6,18 +6,20 @@ import { Post } from './post/Post'
 
 type MyPostsType = {
   posts: Array<PostsType>
+  addPost: () => void
+  onPostChange: (text: string) => void
   newPostText: string
-  dispatch: (action: any) => void
 }
 
 export const MyPosts = (props: MyPostsType) => {
   let postsElements = props.posts.map((p) => <Post message={p.message} likesCount={p.likesCount} />)
   let newPostElement = React.createRef<HTMLTextAreaElement>()
-  let addPost = () => {
-    props.dispatch(addPostAC())
+  let onAddPost = () => {
+    props.addPost()
   }
   let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.dispatch(updateNewPostChangeAC(e.currentTarget.value))
+    const text = e.currentTarget.value
+    props.onPostChange(text)
   }
   return (
     <div>
@@ -28,7 +30,7 @@ export const MyPosts = (props: MyPostsType) => {
             <textarea ref={newPostElement} onChange={onPostChange} value={props.newPostText} />
           </div>
           <div>
-            <button onClick={addPost}>Add post</button>
+            <button onClick={onAddPost}>Add post</button>
           </div>
           <div>
             <button>Remove</button>
