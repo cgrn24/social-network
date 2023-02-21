@@ -7,10 +7,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Dialogs } from './components/dialogs/Dialogs'
 import { RootStateType } from './redux/state'
 import { RootStoreType, StoreType } from './redux/store'
+import { DialogsContainer } from './components/dialogs/DialogsContainer'
 
 export type AppPropsType = {
-  state: RootStateType
-  dispatch: (action: any) => void
   store: StoreType
 }
 
@@ -26,7 +25,7 @@ function App(props: AppPropsType) {
               <Profile store={props.store} />
             </Route>
             <Route path='/dialogs'>
-              <Dialogs state={props.state.dialogsPage} dispatch={props.dispatch} />
+              <DialogsContainer store={props.store} />
             </Route>
           </Switch>
         </div>

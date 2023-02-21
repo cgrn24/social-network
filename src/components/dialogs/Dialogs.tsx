@@ -14,7 +14,8 @@ type DialogsInpageType = {
 
 type StateDialogsType = {
   state: DialogsInpageType
-  dispatch: (action: any) => void
+  onSendMessageClick: () => void
+  onNewMessageChange: (body: string) => void
 }
 
 export const Dialogs = (props: StateDialogsType) => {
@@ -22,11 +23,11 @@ export const Dialogs = (props: StateDialogsType) => {
   let dialogsElements = props.state.dialogs.map((d) => <DialogItem name={d.name} id={d.id} />)
   let messagesElements = props.state.messages.map((m) => <Message message={m.message} />)
   let onSendMessageClick = () => {
-    props.dispatch(sendMessageAC())
+    props.onSendMessageClick()
   }
   let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const body = e.target.value
-    props.dispatch(updateNewMessageAC(body))
+    props.onNewMessageChange(body)
   }
 
   return (

@@ -16,6 +16,12 @@ export type MessagesType = {
   message: string
 }
 
+export type FriendType = {
+  id: number
+  name: string
+  avatar: string
+}
+
 export type ProfilePageType = {
   posts: Array<PostsType>
   newPostText: string
@@ -27,7 +33,9 @@ export type DialogsPageType = {
   newMessageBody: string
 }
 
-export type SidebarType = {}
+export type SidebarType = {
+  friendsData: Array<FriendType>
+}
 
 export type RootStateType = {
   profilePage: ProfilePageType
@@ -44,30 +52,30 @@ export type RootStateType = {
 //   addPost: AddPostType
 // }
 
-export const state: RootStateType = {
-  profilePage: {
-    posts: [
-      { id: 1, message: 'Hi, havayu', likesCount: 12 },
-      { id: 2, message: 'Its my first yopta?', likesCount: 9 },
-    ],
-    newPostText: '',
-  },
-  dialogsPage: {
-    dialogs: [
-      { id: 1, name: 'Zhmykh' },
-      { id: 2, name: 'Valera' },
-      { id: 3, name: 'Pozhiloy' },
-      { id: 4, name: 'Arsen' },
-    ],
-    messages: [
-      { id: 1, message: 'Hi' },
-      { id: 2, message: 'How are you? Havaesh?' },
-      { id: 3, message: 'Yopta' },
-    ],
-    newMessageBody: '',
-  },
-  sidebar: {},
-}
+// export const state: RootStateType = {
+//   profilePage: {
+//     posts: [
+//       { id: 1, message: 'Hi, havayu', likesCount: 12 },
+//       { id: 2, message: 'Its my first yopta?', likesCount: 9 },
+//     ],
+//     newPostText: '',
+//   },
+//   dialogsPage: {
+//     dialogs: [
+//       { id: 1, name: 'Zhmykh' },
+//       { id: 2, name: 'Valera' },
+//       { id: 3, name: 'Pozhiloy' },
+//       { id: 4, name: 'Arsen' },
+//     ],
+//     messages: [
+//       { id: 1, message: 'Hi' },
+//       { id: 2, message: 'How are you? Havaesh?' },
+//       { id: 3, message: 'Yopta' },
+//     ],
+//     newMessageBody: '',
+//   },
+//   sidebar: {},
+// }
 
 // export const addPost = (postText: string) => {
 //   let newPost: PostsType = {
