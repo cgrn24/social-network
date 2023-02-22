@@ -1,20 +1,23 @@
 import React, { ChangeEvent, ChangeEventHandler } from 'react'
-import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { sendMessageAC, updateNewMessageAC } from '../../redux/dialogsReducer'
-import { StoreType } from '../../redux/store'
+import { ActionsType } from '../../redux/store'
 import { Dialogs } from './Dialogs'
 
-type DialogsContainerType = {
-  store: StoreType
+const mapStateToProps = (state: any) => {
+  return {
+    dialogsPage: state.dialogsPage,
+  }
+}
+const mapDispatchToProps = (dispatch: (action: ActionsType) => void) => {
+  return {
+    onSendMessageClick: () => {
+      dispatch(sendMessageAC())
+    },
+    onNewMessageChange: (body: string) => {
+      dispatch(updateNewMessageAC(body))
+    },
+  }
 }
 
-export const DialogsContainer = (props: DialogsContainerType) => {
-  let onSendMessageClick = () => {
-    props.store.dispatch(sendMessageAC())
-  }
-  let onNewMessageChange = (body: string) => {
-    props.store.dispatch(updateNewMessageAC(body))
-  }
-
-  return <Dialogs onSendMessageClick={onSendMessageClick} onNewMessageChange={onNewMessageChange} state={props.store.getState().dialogsPage} />
-}
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)

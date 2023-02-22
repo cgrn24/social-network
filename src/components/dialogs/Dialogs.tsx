@@ -13,15 +13,15 @@ type DialogsInpageType = {
 }
 
 type StateDialogsType = {
-  state: DialogsInpageType
+  dialogsPage: DialogsInpageType
   onSendMessageClick: () => void
   onNewMessageChange: (body: string) => void
 }
 
 export const Dialogs = (props: StateDialogsType) => {
-  let newMessageBody = props.state.newMessageBody
-  let dialogsElements = props.state.dialogs.map((d) => <DialogItem name={d.name} id={d.id} />)
-  let messagesElements = props.state.messages.map((m) => <Message message={m.message} />)
+  let newMessageBody = props.dialogsPage.newMessageBody
+  let dialogsElements = props.dialogsPage.dialogs.map((d) => <DialogItem name={d.name} id={d.id} />)
+  let messagesElements = props.dialogsPage.messages.map((m) => <Message message={m.message} />)
   let onSendMessageClick = () => {
     props.onSendMessageClick()
   }

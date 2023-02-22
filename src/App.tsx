@@ -25,7 +25,7 @@ function App(props: AppPropsType) {
               <Profile store={props.store} />
             </Route>
             <Route path='/dialogs'>
-              <DialogsContainer store={props.store} />
+              <DialogsContainer />
             </Route>
           </Switch>
         </div>

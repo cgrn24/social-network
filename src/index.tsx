@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import './index.css'
@@ -9,7 +10,9 @@ import { RootStoreType, store } from './redux/store'
 const renderEntireTree = (state: RootStateType) => {
   ReactDOM.render(
     <BrowserRouter>
-      <App store={store} />
+      <Provider store={store}>
+        <App store={store} />
+      </Provider>
     </BrowserRouter>,
     document.getElementById('root')
   )
