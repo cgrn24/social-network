@@ -8,6 +8,7 @@ import { Dialogs } from './components/dialogs/Dialogs'
 import { RootStateType } from './redux/state'
 import { RootStoreType, StoreType } from './redux/store'
 import { DialogsContainer } from './components/dialogs/DialogsContainer'
+import { Users } from './components/users/Users'
 
 export type AppPropsType = {
   store: StoreType
@@ -26,6 +27,9 @@ function App(props: AppPropsType) {
             </Route>
             <Route path='/dialogs'>
               <DialogsContainer />
+            </Route>
+            <Route path='/users'>
+              <Users />
             </Route>
           </Switch>
         </div>
