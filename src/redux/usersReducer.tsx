@@ -2,37 +2,12 @@ const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
 
-export type UserType = { id: number; photoUrl: string; follow: boolean; fullName: string; status: string; location: { city: string; country: string } }
+export type UserType = { name: string; id: number; photos: { small: string | null; large: string | null }; status: string | null; followed: boolean }
 export type UsersType = Array<UserType>
 type InitialStateType = { users: UsersType }
 
 const initialState = {
-  users: [
-    {
-      id: 1,
-      photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Alonso_2016.jpg/274px-Alonso_2016.jpg',
-      follow: true,
-      fullName: 'Jovan',
-      status: 'Cool',
-      location: { city: 'City 17', country: 'Good country' },
-    },
-    {
-      id: 2,
-      photoUrl: 'https://cdn-4.motorsport.com/images/mgl/0mb95oa2/s800/lewis-hamilton-mercedes-1.jpg',
-      follow: false,
-      fullName: 'Johan',
-      status: 'Not Cool',
-      location: { city: 'City 17', country: 'Strange country' },
-    },
-    {
-      id: 3,
-      photoUrl: 'https://cloudfront-us-east-2.images.arcpublishing.com/reuters/O2Q7N5NEFBNVPGZYCHPTLDF52U.jpg',
-      follow: true,
-      fullName: 'Iohan',
-      status: 'Maybe Cool',
-      location: { city: 'City 17', country: 'Cool country' },
-    },
-  ],
+  users: [],
 }
 
 export const usersReducer = (state: InitialStateType = initialState, action: any) => {
