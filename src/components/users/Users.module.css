@@ -2,3 +2,9 @@
   width: 100px;
   height: 200px;
 }
+.selectedPage {
+  font-weight: bold;
+}
+stylePage {
+  font-weight: 400;
+}
