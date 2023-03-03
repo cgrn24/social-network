@@ -4,9 +4,6 @@ import style from './Users.module.css'
 type UsersFCPropsType = {
   follow: (userId: number) => void
   unfollow: (userId: number) => void
-  setUsers: (users: any) => void
-  setCurrentPage: (currentPage: number) => void
-  setTotalUsersCount: (usersCount: number) => void
   onPageChanged: (p: number) => void
   users: UsersType
   pageSize: number
