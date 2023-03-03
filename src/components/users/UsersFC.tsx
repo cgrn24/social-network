@@ -1,23 +1,37 @@
-import axios from 'axios'
-import { usersReducer, UsersType } from '../../redux/usersReducer'
+import { UsersType } from '../../redux/usersReducer'
 import style from './Users.module.css'
 
-type UsersPropsType = {
+type UsersFCPropsType = {
   follow: (userId: number) => void
   unfollow: (userId: number) => void
   setUsers: (users: any) => void
+  setCurrentPage: (currentPage: number) => void
+  setTotalUsersCount: (usersCount: number) => void
+  onPageChanged: (p: number) => void
   users: UsersType
+  pageSize: number
+  totalUsersCount: number
+  currentPage: number
 }
 
-export const Users = (props: UsersPropsType) => {
-  if (props.users.length === 0) {
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then((res) => {
-      props.setUsers(res.data.items)
-    })
+export const Users = (props: UsersFCPropsType) => {
+  const pages = []
+  const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i)
   }
 
   return (
     <div>
+      <div>
+        {pages.map((p) => {
+          return (
+            <span className={props.currentPage === p ? style.selectedPage : style.page} onClick={() => props.onPageChanged(p)}>
+              {p}
+            </span>
+          )
+        })}
+      </div>
       {props.users.map((u) => (
         <div key={u.id}>
           <span>
