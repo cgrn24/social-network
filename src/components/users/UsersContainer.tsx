@@ -71,6 +71,7 @@ const mapDispatchToProps = (dispatch: (action: ActionsType) => void) => {
       dispatch(followAC(userId))
     },
     unfollow: (userId: number) => {
+      debugger
       dispatch(unfollowAC(userId))
     },
     setUsers: (users: any) => {

@@ -48,6 +48,7 @@ export const usersReducer = (state: InitialStateType = initialState, action: any
       return { ...state, currentPage: action.currentPage }
     }
     case SET_TOTAL_USERS_COUNT: {
+      debugger
       return { ...state, totalUsersCount: action.totalUsersCount }
     }
     case IS_FETCHING: {
@@ -70,5 +71,5 @@ export const followAC = (userId: number) => ({ type: FOLLOW, userId })
 export const unfollowAC = (userId: number) => ({ type: UNFOLLOW, userId })
 export const setUsersAC = (users: any) => ({ type: SET_USERS, users })
 export const setCurrentPageAC = (currentPage: number) => ({ type: SET_CURRENT_PAGE, currentPage })
-export const setTotalUsersCountAC = (totalUsersCount: number) => ({ type: SET_CURRENT_PAGE, totalUsersCount })
+export const setTotalUsersCountAC = (totalUsersCount: number) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount })
 export const setIsFetchingAC = (isFetching: boolean) => ({ type: IS_FETCHING, isFetching })
