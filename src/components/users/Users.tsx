@@ -5,14 +5,17 @@ type UsersFCPropsType = {
   follow: (userId: number) => void
   unfollow: (userId: number) => void
   onPageChanged: (p: number) => void
+  setIsFetching: (isFetching: boolean) => void
   users: UsersType
   pageSize: number
   totalUsersCount: number
   currentPage: number
+  isFetching: boolean
 }
 
 export const Users = (props: UsersFCPropsType) => {
-  const pages = []
+  let pages: number[] = []
+
   const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i)

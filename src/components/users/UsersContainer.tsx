@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React from 'react'
 import { connect } from 'react-redux'
-import { ActionsType } from '../../redux/store'
-import { followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC, UsersType } from '../../redux/usersReducer'
+import { ActionsType, RootStoreType } from '../../redux/store'
+import { followAC, setCurrentPageAC, setIsFetchingAC, setTotalUsersCountAC, setUsersAC, unfollowAC, UsersType } from '../../redux/usersReducer'
 import { Users } from './Users'
 
 type UsersPropsType = {
@@ -11,46 +11,58 @@ type UsersPropsType = {
   setUsers: (users: any) => void
   setCurrentPage: (currentPage: number) => void
   setTotalUsersCount: (usersCount: number) => void
+  setIsFetching: (isFetching: boolean) => void
   users: UsersType
   pageSize: number
   totalUsersCount: number
   currentPage: number
+  isFetching: boolean
 }
 
 class UsersContainer extends React.Component<UsersPropsType> {
   componentDidMount() {
+    this.props.setIsFetching(true)
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((res) => {
       this.props.setUsers(res.data.items)
       this.props.setTotalUsersCount(res.data.totalCount)
+      this.props.setIsFetching(false)
     })
   }
   onPageChanged = (pageNumber: number) => {
     this.props.setCurrentPage(pageNumber)
+    this.props.setIsFetching(true)
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then((res) => {
       this.props.setUsers(res.data.items)
+      this.props.setIsFetching(false)
     })
   }
   render() {
     return (
-      <Users
-        follow={this.props.follow}
-        unfollow={this.props.unfollow}
-        users={this.props.users}
-        pageSize={this.props.pageSize}
-        totalUsersCount={this.props.totalUsersCount}
-        currentPage={this.props.currentPage}
-        onPageChanged={this.onPageChanged}
-      />
+      <>
+        {this.props.isFetching ? <img src='https://media.tenor.com/RVvnVPK-6dcAAAAM/reload-cat.gif' /> : null}
+        <Users
+          follow={this.props.follow}
+          unfollow={this.props.unfollow}
+          users={this.props.users}
+          pageSize={this.props.pageSize}
+          totalUsersCount={this.props.totalUsersCount}
+          currentPage={this.props.currentPage}
+          onPageChanged={this.onPageChanged}
+          isFetching={this.props.isFetching}
+          setIsFetching={this.props.setIsFetching}
+        />
+      </>
     )
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootStoreType) => {
   return {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
+    isFetching: state.usersPage.isFetching,
   }
 }
 const mapDispatchToProps = (dispatch: (action: ActionsType) => void) => {
@@ -69,6 +81,9 @@ const mapDispatchToProps = (dispatch: (action: ActionsType) => void) => {
     },
     setTotalUsersCount: (totalUsersCount: number) => {
       dispatch(setTotalUsersCountAC(totalUsersCount))
+    },
+    setIsFetching: (isFetching: boolean) => {
+      dispatch(setIsFetchingAC(isFetching))
     },
   }
 }
