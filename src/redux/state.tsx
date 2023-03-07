@@ -22,9 +22,31 @@ export type FriendType = {
   avatar: string
 }
 
+export type ProfileType = null | {
+  userId: number
+  lookingForAJob: boolean
+  lookingForAJobDescription: string
+  fullName: string
+  contacts: {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+  }
+  photos: {
+    small: string
+    large: string
+  }
+}
+
 export type ProfilePageType = {
   posts: Array<PostsType>
   newPostText: string
+  profile: ProfileType
 }
 
 export type DialogsPageType = {
