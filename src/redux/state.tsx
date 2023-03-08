@@ -1,4 +1,9 @@
-import { StringLiteralLike } from 'typescript'
+export type AuthType = {
+  userId: string | number | null
+  email: string | null
+  login: string | null
+  isAuth: boolean
+}
 
 export type PostsType = {
   id?: number
