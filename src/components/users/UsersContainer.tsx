@@ -22,19 +22,29 @@ type UsersPropsType = {
 class UsersContainer extends React.Component<UsersPropsType> {
   componentDidMount() {
     this.props.setIsFetching(true)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((res) => {
-      this.props.setUsers(res.data.items)
-      this.props.setTotalUsersCount(res.data.totalCount)
-      this.props.setIsFetching(false)
-    })
+    axios
+      .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+        withCredentials: true,
+        headers: { 'API-KEY': '6db0aff4-bda8-4df9-8071-4eea2acfbc33' },
+      })
+      .then((res) => {
+        this.props.setUsers(res.data.items)
+        this.props.setTotalUsersCount(res.data.totalCount)
+        this.props.setIsFetching(false)
+      })
   }
   onPageChanged = (pageNumber: number) => {
     this.props.setCurrentPage(pageNumber)
     this.props.setIsFetching(true)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then((res) => {
-      this.props.setUsers(res.data.items)
-      this.props.setIsFetching(false)
-    })
+    axios
+      .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+        withCredentials: true,
+        headers: { 'API-KEY': '6db0aff4-bda8-4df9-8071-4eea2acfbc33' },
+      })
+      .then((res) => {
+        this.props.setUsers(res.data.items)
+        this.props.setIsFetching(false)
+      })
   }
   render() {
     return (
