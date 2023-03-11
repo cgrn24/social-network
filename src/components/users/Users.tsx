@@ -49,11 +49,16 @@ export const Users = (props: UsersFCPropsType) => {
               {u.followed ? (
                 <button
                   onClick={() =>
-                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/$(u.id)`, { withCredentials: true }).then((res: any) => {
-                      if (res.data.resultCode === 0) {
-                        props.unfollow(u.id)
-                      }
-                    })
+                    axios
+                      .delete(`https://social-network.samuraijs.com/api/1.0/follow/$(u.id)`, {
+                        withCredentials: true,
+                        headers: { 'API-KEY': '6db0aff4-bda8-4df9-8071-4eea2acfbc33' },
+                      })
+                      .then((res: any) => {
+                        if (res.data.resultCode === 0) {
+                          props.unfollow(u.id)
+                        }
+                      })
                   }
                 >
                   Unfollow
@@ -61,11 +66,17 @@ export const Users = (props: UsersFCPropsType) => {
               ) : (
                 <button
                   onClick={() =>
-                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/$(u.id)`, {}, { withCredentials: true }).then((res: any) => {
-                      if (res.data.resultCode === 0) {
-                        props.follow(u.id)
-                      }
-                    })
+                    axios
+                      .post(
+                        `https://social-network.samuraijs.com/api/1.0/follow/$(u.id)`,
+                        {},
+                        { withCredentials: true, headers: { 'API-KEY': '6db0aff4-bda8-4df9-8071-4eea2acfbc33' } }
+                      )
+                      .then((res: any) => {
+                        if (res.data.resultCode === 0) {
+                          props.follow(u.id)
+                        }
+                      })
                   }
                 >
                   Follow
