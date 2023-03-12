@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
-import { UsersType } from '../../redux/usersReducer'
+import { setIsFollowing, UsersType } from '../../redux/usersReducer'
 import style from './Users.module.css'
 
 type UsersFCPropsType = {
@@ -8,11 +8,13 @@ type UsersFCPropsType = {
   unfollow: (userId: number) => void
   onPageChanged: (p: number) => void
   setIsFetching: (isFetching: boolean) => void
+  setIsFollowing: (isFollowing: boolean, userId: number) => void
   users: UsersType
   pageSize: number
   totalUsersCount: number
   currentPage: number
   isFetching: boolean
+  followingInProgress: number[]
 }
 
 export const Users = (props: UsersFCPropsType) => {
@@ -48,7 +50,9 @@ export const Users = (props: UsersFCPropsType) => {
             <div>
               {u.followed ? (
                 <button
-                  onClick={() =>
+                  disabled={props.followingInProgress.some((id) => id === u.id)}
+                  onClick={() => {
+                    setIsFollowing(true, u.id)
                     axios
                       .delete(`https://social-network.samuraijs.com/api/1.0/follow/$(u.id)`, {
                         withCredentials: true,
@@ -57,15 +61,18 @@ export const Users = (props: UsersFCPropsType) => {
                       .then((res: any) => {
                         if (res.data.resultCode === 0) {
                           props.unfollow(u.id)
+                          setIsFollowing(false, u.id)
                         }
                       })
-                  }
+                  }}
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
-                  onClick={() =>
+                  disabled={props.followingInProgress.some((id) => id === u.id)}
+                  onClick={() => {
+                    setIsFollowing(true, u.id)
                     axios
                       .post(
                         `https://social-network.samuraijs.com/api/1.0/follow/$(u.id)`,
@@ -75,9 +82,10 @@ export const Users = (props: UsersFCPropsType) => {
                       .then((res: any) => {
                         if (res.data.resultCode === 0) {
                           props.follow(u.id)
+                          setIsFollowing(false, u.id)
                         }
                       })
-                  }
+                  }}
                 >
                   Follow
                 </button>
