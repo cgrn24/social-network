@@ -3,7 +3,19 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { usersApi } from '../../api/api'
 import { ActionsType, RootStoreType } from '../../redux/store'
-import { follow, getUsersTC, setCurrentPage, setIsFetching, setIsFollowing, setTotalUsersCount, setUsers, unfollow, UsersType } from '../../redux/usersReducer'
+import {
+  follow,
+  followTC,
+  getUsersTC,
+  setCurrentPage,
+  setIsFetching,
+  setIsFollowing,
+  setTotalUsersCount,
+  setUsers,
+  unfollow,
+  unfollowTC,
+  UsersType,
+} from '../../redux/usersReducer'
 import { Users } from './Users'
 
 type UsersPropsType = {
@@ -15,6 +27,8 @@ type UsersPropsType = {
   setIsFetching: (isFetching: boolean) => void
   setIsFollowing: (isFollowing: boolean, userId: number) => void
   getUsersTC: (currentPage: number, pageSize: number) => void
+  followTC: (userId: number) => void
+  unfollowTC: (userId: number) => void
   users: UsersType
   pageSize: number
   totalUsersCount: number
@@ -26,19 +40,9 @@ type UsersPropsType = {
 class UsersContainer extends React.Component<UsersPropsType> {
   componentDidMount() {
     this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
-    // this.props.setIsFetching(true)
-    // usersApi.getUsers(this.props.currentPage, this.props.pageSize).then((res) => {
-    //   this.props.setUsers(res.items)
-    //   this.props.setTotalUsersCount(res.totalCount)
-    //   this.props.setIsFetching(false)
   }
   onPageChanged = (pageNumber: number) => {
-    this.props.setCurrentPage(pageNumber)
-    this.props.setIsFetching(true)
-    usersApi.getUsers(pageNumber, this.props.pageSize).then((res) => {
-      this.props.setUsers(res.items)
-      this.props.setIsFetching(false)
-    })
+    this.props.getUsersTC(pageNumber, this.props.pageSize)
   }
   render() {
     return (
@@ -56,6 +60,8 @@ class UsersContainer extends React.Component<UsersPropsType> {
           setIsFetching={this.props.setIsFetching}
           setIsFollowing={this.props.setIsFollowing}
           followingInProgress={this.props.followingInProgress}
+          followTC={this.props.followTC}
+          unfollowTC={this.props.unfollowTC}
         />
       </>
     )
@@ -96,6 +102,15 @@ const mapStateToProps = (state: RootStoreType) => {
 //   }
 // }
 
-export default connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setIsFetching, setIsFollowing, getUsersTC })(
-  UsersContainer
-)
+export default connect(mapStateToProps, {
+  follow,
+  unfollow,
+  setUsers,
+  setCurrentPage,
+  setTotalUsersCount,
+  setIsFetching,
+  setIsFollowing,
+  getUsersTC,
+  followTC,
+  unfollowTC,
+})(UsersContainer)

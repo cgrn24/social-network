@@ -95,3 +95,22 @@ export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: 
     dispatch(setIsFetching(false))
   })
 }
+
+export const unfollowTC = (userId: number) => (dispatch: Dispatch) => {
+  dispatch(setIsFollowing(true, userId))
+  usersApi.follow(userId).then((res: any) => {
+    if (res.data.resultCode === 0) {
+      dispatch(unfollow(userId))
+      dispatch(setIsFollowing(false, userId))
+    }
+  })
+}
+export const followTC = (userId: number) => (dispatch: Dispatch) => {
+  setIsFollowing(true, userId)
+  usersApi.unfollow(userId).then((res: any) => {
+    if (res.data.resultCode === 0) {
+      dispatch(follow(userId))
+      dispatch(setIsFollowing(false, userId))
+    }
+  })
+}

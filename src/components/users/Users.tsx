@@ -1,6 +1,5 @@
-import axios from 'axios'
 import { NavLink } from 'react-router-dom'
-import { setIsFollowing, UsersType } from '../../redux/usersReducer'
+import { UsersType } from '../../redux/usersReducer'
 import style from './Users.module.css'
 
 type UsersFCPropsType = {
@@ -9,6 +8,8 @@ type UsersFCPropsType = {
   onPageChanged: (p: number) => void
   setIsFetching: (isFetching: boolean) => void
   setIsFollowing: (isFollowing: boolean, userId: number) => void
+  followTC: (userId: number) => void
+  unfollowTC: (userId: number) => void
   users: UsersType
   pageSize: number
   totalUsersCount: number
@@ -52,18 +53,7 @@ export const Users = (props: UsersFCPropsType) => {
                 <button
                   disabled={props.followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    setIsFollowing(true, u.id)
-                    axios
-                      .delete(`https://social-network.samuraijs.com/api/1.0/follow/$(u.id)`, {
-                        withCredentials: true,
-                        headers: { 'API-KEY': '6db0aff4-bda8-4df9-8071-4eea2acfbc33' },
-                      })
-                      .then((res: any) => {
-                        if (res.data.resultCode === 0) {
-                          props.unfollow(u.id)
-                          setIsFollowing(false, u.id)
-                        }
-                      })
+                    props.unfollowTC(u.id)
                   }}
                 >
                   Unfollow
@@ -72,19 +62,7 @@ export const Users = (props: UsersFCPropsType) => {
                 <button
                   disabled={props.followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    setIsFollowing(true, u.id)
-                    axios
-                      .post(
-                        `https://social-network.samuraijs.com/api/1.0/follow/$(u.id)`,
-                        {},
-                        { withCredentials: true, headers: { 'API-KEY': '6db0aff4-bda8-4df9-8071-4eea2acfbc33' } }
-                      )
-                      .then((res: any) => {
-                        if (res.data.resultCode === 0) {
-                          props.follow(u.id)
-                          setIsFollowing(false, u.id)
-                        }
-                      })
+                    props.followTC(u.id)
                   }}
                 >
                   Follow
