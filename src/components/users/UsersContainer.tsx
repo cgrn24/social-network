@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { usersApi } from '../../api/api'
 import { ActionsType, RootStoreType } from '../../redux/store'
-import { follow, setCurrentPage, setIsFetching, setIsFollowing, setTotalUsersCount, setUsers, unfollow, UsersType } from '../../redux/usersReducer'
+import { follow, getUsersTC, setCurrentPage, setIsFetching, setIsFollowing, setTotalUsersCount, setUsers, unfollow, UsersType } from '../../redux/usersReducer'
 import { Users } from './Users'
 
 type UsersPropsType = {
@@ -14,6 +14,7 @@ type UsersPropsType = {
   setTotalUsersCount: (usersCount: number) => void
   setIsFetching: (isFetching: boolean) => void
   setIsFollowing: (isFollowing: boolean, userId: number) => void
+  getUsersTC: (currentPage: number, pageSize: number) => void
   users: UsersType
   pageSize: number
   totalUsersCount: number
@@ -24,12 +25,12 @@ type UsersPropsType = {
 
 class UsersContainer extends React.Component<UsersPropsType> {
   componentDidMount() {
-    this.props.setIsFetching(true)
-    usersApi.getUsers(this.props.currentPage, this.props.pageSize).then((res) => {
-      this.props.setUsers(res.items)
-      this.props.setTotalUsersCount(res.totalCount)
-      this.props.setIsFetching(false)
-    })
+    this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
+    // this.props.setIsFetching(true)
+    // usersApi.getUsers(this.props.currentPage, this.props.pageSize).then((res) => {
+    //   this.props.setUsers(res.items)
+    //   this.props.setTotalUsersCount(res.totalCount)
+    //   this.props.setIsFetching(false)
   }
   onPageChanged = (pageNumber: number) => {
     this.props.setCurrentPage(pageNumber)
@@ -95,4 +96,6 @@ const mapStateToProps = (state: RootStoreType) => {
 //   }
 // }
 
-export default connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setIsFetching, setIsFollowing })(UsersContainer)
+export default connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setIsFetching, setIsFollowing, getUsersTC })(
+  UsersContainer
+)

@@ -1,9 +1,10 @@
 import dialogsReducer, { DialogsActionsType } from './dialogsReducer'
 import sidebarReducer from './sidebarReducer'
 import profileReducer, { ProfileActionsType } from './profileReducer'
-import { combineReducers, createStore, Store } from 'redux'
+import { applyMiddleware, combineReducers, createStore, Store } from 'redux'
 import { UsersPageType, usersReducer } from './usersReducer'
 import { AuthActionsType, authReducer } from './authReducer'
+import thunk from 'redux-thunk'
 
 const reducers = combineReducers({
   profilePage: profileReducer,
@@ -17,4 +18,4 @@ export type RootStoreType = ReturnType<typeof reducers>
 export type ActionsType = ProfileActionsType | DialogsActionsType | UsersPageType | AuthActionsType
 export type StoreType = Store<RootStoreType, ActionsType>
 
-export const store = createStore(reducers)
+export const store = createStore(reducers, applyMiddleware(thunk))
