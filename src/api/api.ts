@@ -16,4 +16,13 @@ export const usersApi = {
   follow(userId: number) {
     return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
   },
+  getProfile(userId: number | string) {
+    return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+  },
+}
+
+export const authAPI = {
+  me() {
+    return instance.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
+  },
 }
