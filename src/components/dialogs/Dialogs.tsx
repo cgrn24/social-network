@@ -1,6 +1,5 @@
 import React, { ChangeEvent, ChangeEventHandler } from 'react'
-import { NavLink } from 'react-router-dom'
-import { sendMessageAC, updateNewMessageAC } from '../../redux/dialogsReducer'
+import { Redirect } from 'react-router-dom'
 import { DialogsType, MessagesType } from '../../redux/state'
 import { DialogItem } from './DialogItem/DialogItem'
 import s from './Dialogs.module.css'
@@ -16,6 +15,7 @@ type StateDialogsType = {
   dialogsPage: DialogsInpageType
   onSendMessageClick: () => void
   onNewMessageChange: (body: string) => void
+  isAuth: boolean
 }
 
 export const Dialogs = (props: StateDialogsType) => {
@@ -29,7 +29,7 @@ export const Dialogs = (props: StateDialogsType) => {
     const body = e.target.value
     props.onNewMessageChange(body)
   }
-
+  if (!props.isAuth) return <Redirect to={'/login'} />
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>
