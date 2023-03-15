@@ -1,5 +1,6 @@
 import React, { ChangeEvent, ChangeEventHandler } from 'react'
 import { connect } from 'react-redux'
+import { AuthRedirect } from '../../hoc/AuthRedirect'
 import { sendMessageAC, updateNewMessageAC } from '../../redux/dialogsReducer'
 import { ActionsType } from '../../redux/store'
 import { Dialogs } from './Dialogs'
@@ -7,7 +8,6 @@ import { Dialogs } from './Dialogs'
 const mapStateToProps = (state: any) => {
   return {
     dialogsPage: state.dialogsPage,
-    isAuth: state.auth.isAuth,
   }
 }
 const mapDispatchToProps = (dispatch: (action: ActionsType) => void) => {
@@ -21,4 +21,6 @@ const mapDispatchToProps = (dispatch: (action: ActionsType) => void) => {
   }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+const AuthRedirectComponent = AuthRedirect(Dialogs)
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
