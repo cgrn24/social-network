@@ -1,7 +1,9 @@
 import axios from 'axios'
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { usersApi } from '../../api/api'
+import { AuthRedirect } from '../../hoc/AuthRedirect'
 import { ActionsType, RootStoreType } from '../../redux/store'
 import {
   follow,
@@ -102,15 +104,18 @@ const mapStateToProps = (state: RootStoreType) => {
 //   }
 // }
 
-export default connect(mapStateToProps, {
-  follow,
-  unfollow,
-  setUsers,
-  setCurrentPage,
-  setTotalUsersCount,
-  setIsFetching,
-  setIsFollowing,
-  getUsersTC,
-  followTC,
-  unfollowTC,
-})(UsersContainer)
+export default compose<React.ComponentType>(
+  AuthRedirect,
+  connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    setIsFetching,
+    setIsFollowing,
+    getUsersTC,
+    followTC,
+    unfollowTC,
+  })
+)(UsersContainer)

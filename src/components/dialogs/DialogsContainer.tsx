@@ -1,5 +1,6 @@
 import React, { ChangeEvent, ChangeEventHandler } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { AuthRedirect } from '../../hoc/AuthRedirect'
 import { sendMessageAC, updateNewMessageAC } from '../../redux/dialogsReducer'
 import { ActionsType } from '../../redux/store'
@@ -21,6 +22,4 @@ const mapDispatchToProps = (dispatch: (action: ActionsType) => void) => {
   }
 }
 
-const AuthRedirectComponent = AuthRedirect(Dialogs)
-
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
+export default compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps), AuthRedirect)(Dialogs)
