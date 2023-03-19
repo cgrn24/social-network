@@ -2,9 +2,8 @@ import axios from 'axios'
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { usersApi } from '../../api/api'
 import { AuthRedirect } from '../../hoc/AuthRedirect'
-import { ActionsType, RootStoreType } from '../../redux/store'
+import { RootStoreType } from '../../redux/store'
 import {
   follow,
   followTC,
@@ -80,29 +79,6 @@ const mapStateToProps = (state: RootStoreType) => {
     followingInProgress: state.usersPage.followingInProgress,
   }
 }
-// const mapDispatchToProps = (dispatch: (action: ActionsType) => void) => {
-//   return {
-//     follow: (userId: number) => {
-//       dispatch(followAC(userId))
-//     },
-//     unfollow: (userId: number) => {
-//       debugger
-//       dispatch(unfollowAC(userId))
-//     },
-//     setUsers: (users: any) => {
-//       dispatch(setUsersAC(users))
-//     },
-//     setCurrentPage: (currentPage: number) => {
-//       dispatch(setCurrentPageAC(currentPage))
-//     },
-//     setTotalUsersCount: (totalUsersCount: number) => {
-//       dispatch(setTotalUsersCountAC(totalUsersCount))
-//     },
-//     setIsFetching: (isFetching: boolean) => {
-//       dispatch(setIsFetchingAC(isFetching))
-//     },
-//   }
-// }
 
 export default compose<React.ComponentType>(
   AuthRedirect,
