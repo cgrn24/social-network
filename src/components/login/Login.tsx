@@ -5,7 +5,7 @@ export const Login = () => {
   const onSubmit = (formData) => {
     console.log(formData)
   }
-  return <LoginReduxForm />
+  return <LoginReduxForm onSubmit={onSubmit} />
 }
 const LoginForm = (props) => {
   return (
