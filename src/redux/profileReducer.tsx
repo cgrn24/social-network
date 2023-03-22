@@ -3,7 +3,6 @@ import { profileAPI, usersApi } from '../api/api'
 import { ProfilePageType } from './state'
 
 const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
 const SET_STATUS = 'SET-STATUS'
 
@@ -22,14 +21,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
     case ADD_POST: {
       let newPost = {
         id: 5,
-        message: state.newPostText,
+        message: action.newPostTest,
         likesCount: 0,
       }
       const stateCopy = { ...state, posts: [...state.posts, newPost], newPostText: '' }
       return stateCopy
-    }
-    case UPDATE_NEW_POST_TEXT: {
-      return { ...state, newPostText: action.newText }
     }
     case SET_USER_PROFILE: {
       return { ...state, profile: action.profile }
@@ -43,13 +39,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
 }
 
 type AddPostType = ReturnType<typeof addPostAC>
-type UpdateNewPostChangeType = ReturnType<typeof updateNewPostChangeAC>
 type SetProfileType = ReturnType<typeof setUserProfile>
 type SetStatusType = ReturnType<typeof setStatusAC>
-export type ProfileActionsType = AddPostType | UpdateNewPostChangeType | SetProfileType | SetStatusType
+export type ProfileActionsType = AddPostType | SetProfileType | SetStatusType
 
-export const addPostAC = () => ({ type: ADD_POST } as const)
-export const updateNewPostChangeAC = (text: string) => ({ type: UPDATE_NEW_POST_TEXT, newText: text } as const)
+export const addPostAC = (newPostTest: string) => ({ type: ADD_POST, newPostTest: newPostTest } as const)
 export const setUserProfile = (profile: any) => ({ type: SET_USER_PROFILE, profile } as const)
 export const setStatusAC = (status: string) => ({ type: SET_STATUS, status } as const)
 
