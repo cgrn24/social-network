@@ -13,8 +13,8 @@ type PathParamsType = {
 }
 
 type OwnPropsType = {
-  getUserProfileTC: (userId: string | number) => void
-  getUserStatusTC: (userId: string | number) => void
+  getUserProfileTC: (userId: number) => void
+  getUserStatusTC: (userId: number) => void
   updateUserStatusTC: (status: string) => void
   profile: ProfileType
   status: string
@@ -23,9 +23,9 @@ type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnPropsT
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
   componentDidMount() {
-    let userId = this.props.match.params.userId
+    let userId = +this.props.match.params.userId
     if (!userId) {
-      userId = '26659'
+      userId = 26659
     }
     this.props.getUserProfileTC(userId)
     this.props.getUserStatusTC(userId)

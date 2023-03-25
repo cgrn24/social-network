@@ -47,13 +47,13 @@ export const addPostAC = (newPostTest: string) => ({ type: ADD_POST, newPostTest
 export const setUserProfile = (profile: any) => ({ type: SET_USER_PROFILE, profile } as const)
 export const setStatusAC = (status: string) => ({ type: SET_STATUS, status } as const)
 
-export const getUserProfileTC = (userId: number | string) => (dispatch: Dispatch) => {
+export const getUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
   usersApi.getProfile(userId).then((res) => {
     dispatch(setUserProfile(res.data))
   })
 }
 
-export const getUserStatusTC = (userId: number | string) => (dispatch: Dispatch) => {
+export const getUserStatusTC = (userId: number) => (dispatch: Dispatch) => {
   profileAPI.getStatus(userId).then((res) => {
     dispatch(setStatusAC(res.data))
   })
