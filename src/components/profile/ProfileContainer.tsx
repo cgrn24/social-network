@@ -18,6 +18,8 @@ type OwnPropsType = {
   updateUserStatusTC: (status: string) => void
   profile: ProfileType
   status: string
+  userId: number
+  isAuth: boolean
 }
 type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
@@ -25,7 +27,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
   componentDidMount() {
     let userId = +this.props.match.params.userId
     if (!userId) {
-      userId = 26659
+      userId = this.props.userId
     }
     this.props.getUserProfileTC(userId)
     this.props.getUserStatusTC(userId)
@@ -42,6 +44,8 @@ const mapStateToProps = (state: RootStoreType) => {
   return {
     profile: state.profilePage.profile,
     status: state.profilePage.status,
+    userId: state.auth.userId,
+    isAuth: state.auth.isAuth,
   }
 }
 
