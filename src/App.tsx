@@ -7,18 +7,24 @@ import UsersContainer from './components/users/UsersContainer'
 import ProfileContainer from './components/profile/ProfileContainer'
 import HeaderContainer from './components/header/HeaderContainer'
 import { connect } from 'react-redux'
-import { getUserDataTC } from './redux/authReducer'
 import { compose } from 'redux'
+import { initializeAppTC } from './redux/appReducer'
+import { RootStoreType } from './redux/store'
+import Preloader from './components/common/Preloader/Preloader'
 
 type AppPropsType = {
-  getUserDataTC: () => void
+  initializeAppTC: () => void
+  initialized: boolean
 }
 class App extends React.Component<AppPropsType> {
   componentDidMount() {
-    this.props.getUserDataTC()
+    this.props.initializeAppTC()
   }
 
   render() {
+    if (!this.props.initialized) {
+      return <Preloader />
+    }
     return (
       <BrowserRouter>
         <div className='app-wrapper'>
@@ -42,4 +48,9 @@ class App extends React.Component<AppPropsType> {
     )
   }
 }
-export default compose(withRouter, connect(null, { getUserDataTC }))(App)
+
+const mapStateToProps = (state: RootStoreType) => ({
+  initialized: state.app.initialized,
+})
+
+export default compose<React.ComponentType>(withRouter, connect(mapStateToProps, { initializeAppTC }))(App)

@@ -6,6 +6,7 @@ import { UsersPageType, usersReducer } from './usersReducer'
 import { AuthActionsType, authReducer } from './authReducer'
 import { reducer as formReducer } from 'redux-form'
 import thunk from 'redux-thunk'
+import { AppActionsType, appReducer } from './appReducer'
 
 const reducers = combineReducers({
   profilePage: profileReducer,
@@ -14,10 +15,11 @@ const reducers = combineReducers({
   usersPage: usersReducer,
   auth: authReducer,
   form: formReducer,
+  app: appReducer,
 })
 
 export type RootStoreType = ReturnType<typeof reducers>
-export type ActionsType = ProfileActionsType | DialogsActionsType | UsersPageType | AuthActionsType
+export type ActionsType = ProfileActionsType | DialogsActionsType | UsersPageType | AuthActionsType | AppActionsType
 export type StoreType = Store<RootStoreType, ActionsType>
 // type FormReducerType = ReturnType<typeof formReducer>
 

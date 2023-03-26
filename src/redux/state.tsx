@@ -4,6 +4,9 @@ export type AuthType = {
   login: string | null
   isAuth: boolean
 }
+export type AppType = {
+  initialized: boolean
+}
 
 export type PostsType = {
   id?: number
