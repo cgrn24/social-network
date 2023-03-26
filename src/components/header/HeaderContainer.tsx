@@ -9,14 +9,10 @@ import { Header } from './Header'
 type HeaderContainerPropsType = {
   isAuth: boolean
   login: string | null
-  getUserDataTC: () => void
   logoutTC: () => void
 }
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
-  componentDidMount() {
-    this.props.getUserDataTC()
-  }
   render() {
     return <Header {...this.props} logout={logoutTC} />
   }
@@ -28,4 +24,4 @@ const mapStateToProps = (state: RootStoreType) => {
   }
 }
 
-export default connect(mapStateToProps, { getUserDataTC, logoutTC })(HeaderContainer)
+export default connect(mapStateToProps, { logoutTC })(HeaderContainer)
