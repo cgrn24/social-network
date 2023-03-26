@@ -16,9 +16,6 @@ type FormDataType = {
 
 type LoginPropsType = {
   loginTC: (email: string, password: string, rememberMe?: boolean) => void
-}
-
-type LoginFormType = {
   isAuth: boolean
 }
 
@@ -26,12 +23,12 @@ const Login = (props: LoginPropsType) => {
   const onSubmit = (formData: FormDataType) => {
     props.loginTC(formData.login, formData.password, formData.rememberMe)
   }
-  return <LoginReduxForm onSubmit={onSubmit} />
-}
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
   if (props.isAuth) {
     return <Redirect to={'/profile'} />
   }
+  return <LoginReduxForm onSubmit={onSubmit} />
+}
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
