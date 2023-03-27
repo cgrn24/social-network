@@ -53,7 +53,6 @@ export const usersReducer = (state: InitialStateType = initialState, action: any
       return { ...state, currentPage: action.currentPage }
     }
     case SET_TOTAL_USERS_COUNT: {
-      debugger
       return { ...state, totalUsersCount: action.totalUsersCount }
     }
     case IS_FETCHING: {
