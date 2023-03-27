@@ -1,10 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { compose, Dispatch } from 'redux'
+import { compose } from 'redux'
 import { AuthRedirect } from '../../hoc/AuthRedirect'
 import { sendMessageAC } from '../../redux/dialogsReducer'
-import { ActionsType, AppDispatch, RootStoreType } from '../../redux/store'
+import { AppDispatch, RootStoreType } from '../../redux/store'
 import { Dialogs } from './Dialogs'
 
 const mapStateToProps = (state: RootStoreType) => {

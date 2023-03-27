@@ -8,9 +8,13 @@ type ProfileComponentType = {
   profile: ProfileType
   status: string
   updateStatus: (status: string) => void
+  userId: number
+  isAuth: boolean
 }
 
 export const Profile = (props: ProfileComponentType) => {
+  debugger
+
   return (
     <div>
       <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} />

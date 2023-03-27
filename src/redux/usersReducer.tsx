@@ -88,6 +88,7 @@ export const setIsFollowing = (isFollowing: boolean, userId: number) => ({ type:
 
 export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
   dispatch(setIsFetching(true))
+  dispatch(setCurrentPage(currentPage))
   usersApi.getUsers(currentPage, pageSize).then((res) => {
     dispatch(setUsers(res.items))
     dispatch(setTotalUsersCount(res.totalCount))
