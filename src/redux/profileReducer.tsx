@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux'
 import { profileAPI, usersApi } from '../api/api'
 import { ProfilePageType } from './state'
+import { AppThunkType } from './store'
 
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
@@ -47,23 +48,29 @@ export const addPostAC = (newPostTest: string) => ({ type: ADD_POST, newPostTest
 export const setUserProfile = (profile: any) => ({ type: SET_USER_PROFILE, profile } as const)
 export const setStatusAC = (status: string) => ({ type: SET_STATUS, status } as const)
 
-export const getUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
-  usersApi.getProfile(userId).then((res) => {
-    dispatch(setUserProfile(res.data))
-  })
-}
+export const getUserProfileTC =
+  (userId: number): AppThunkType =>
+  (dispatch) => {
+    usersApi.getProfile(userId).then((res) => {
+      dispatch(setUserProfile(res.data))
+    })
+  }
 
-export const getUserStatusTC = (userId: number) => (dispatch: Dispatch) => {
-  profileAPI.getStatus(userId).then((res) => {
-    dispatch(setStatusAC(res.data))
-  })
-}
-export const updateUserStatusTC = (status: string) => (dispatch: Dispatch) => {
-  profileAPI.updateStatus(status).then((res) => {
-    if (res.data.resultCode === 0) {
+export const getUserStatusTC =
+  (userId: number): AppThunkType =>
+  (dispatch) => {
+    profileAPI.getStatus(userId).then((res) => {
       dispatch(setStatusAC(res.data))
-    }
-  })
-}
+    })
+  }
+export const updateUserStatusTC =
+  (status: string): AppThunkType =>
+  (dispatch) => {
+    profileAPI.updateStatus(status).then((res) => {
+      if (res.data.resultCode === 0) {
+        dispatch(setStatusAC(res.data))
+      }
+    })
+  }
 
 export default profileReducer

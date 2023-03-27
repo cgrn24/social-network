@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux'
 import { usersApi } from '../api/api'
+import { AppThunkType } from './store'
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -86,31 +87,37 @@ export const setTotalUsersCount = (totalUsersCount: number) => ({ type: SET_TOTA
 export const setIsFetching = (isFetching: boolean) => ({ type: IS_FETCHING, isFetching })
 export const setIsFollowing = (isFollowing: boolean, userId: number) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFollowing, userId })
 
-export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
-  dispatch(setIsFetching(true))
-  dispatch(setCurrentPage(currentPage))
-  usersApi.getUsers(currentPage, pageSize).then((res) => {
-    dispatch(setUsers(res.items))
-    dispatch(setTotalUsersCount(res.totalCount))
-    dispatch(setIsFetching(false))
-  })
-}
+export const getUsersTC =
+  (currentPage: number, pageSize: number): AppThunkType =>
+  (dispatch) => {
+    dispatch(setIsFetching(true))
+    dispatch(setCurrentPage(currentPage))
+    usersApi.getUsers(currentPage, pageSize).then((res) => {
+      dispatch(setUsers(res.items))
+      dispatch(setTotalUsersCount(res.totalCount))
+      dispatch(setIsFetching(false))
+    })
+  }
 
-export const unfollowTC = (userId: number) => (dispatch: Dispatch) => {
-  dispatch(setIsFollowing(true, userId))
-  usersApi.follow(userId).then((res: any) => {
-    if (res.data.resultCode === 0) {
-      dispatch(unfollow(userId))
-      dispatch(setIsFollowing(false, userId))
-    }
-  })
-}
-export const followTC = (userId: number) => (dispatch: Dispatch) => {
-  setIsFollowing(true, userId)
-  usersApi.unfollow(userId).then((res: any) => {
-    if (res.data.resultCode === 0) {
-      dispatch(follow(userId))
-      dispatch(setIsFollowing(false, userId))
-    }
-  })
-}
+export const unfollowTC =
+  (userId: number): AppThunkType =>
+  (dispatch) => {
+    dispatch(setIsFollowing(true, userId))
+    usersApi.follow(userId).then((res: any) => {
+      if (res.data.resultCode === 0) {
+        dispatch(unfollow(userId))
+        dispatch(setIsFollowing(false, userId))
+      }
+    })
+  }
+export const followTC =
+  (userId: number): AppThunkType =>
+  (dispatch) => {
+    setIsFollowing(true, userId)
+    usersApi.unfollow(userId).then((res: any) => {
+      if (res.data.resultCode === 0) {
+        dispatch(follow(userId))
+        dispatch(setIsFollowing(false, userId))
+      }
+    })
+  }

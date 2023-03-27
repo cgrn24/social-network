@@ -13,7 +13,7 @@ type ProfileComponentType = {
 }
 
 export const Profile = (props: ProfileComponentType) => {
-  debugger
+  console.log(props.isAuth)
 
   return (
     <div>

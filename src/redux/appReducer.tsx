@@ -5,7 +5,7 @@ import { appDispatch } from '..'
 import { authAPI } from '../api/api'
 import { getUserDataTC } from './authReducer'
 import { AppType, AuthType, RootStateType } from './state'
-import { ActionsType } from './store'
+import { ActionsType, AppThunkType } from './store'
 
 const SET_INITIALIZED = 'SET-INITIALIZED'
 
@@ -32,9 +32,7 @@ export const setInitializedAC = () => ({
   type: SET_INITIALIZED,
   initialized: true,
 })
-export const initializeAppTC = () => (dispatch: ThunkDispatch<RootStateType, unknown, ActionsType>) => {
-  const promise = dispatch(getUserDataTC())
-  promise.then(() => {
-    dispatch(setInitializedAC())
-  })
+export const initializeAppTC = (): AppThunkType => async (dispatch) => {
+  dispatch(getUserDataTC())
+  dispatch(setInitializedAC())
 }

@@ -1,8 +1,6 @@
-import axios from 'axios'
 import React from 'react'
 import { connect } from 'react-redux'
-import { authAPI } from '../../api/api'
-import { getUserDataTC, logoutTC } from '../../redux/authReducer'
+import { logoutTC } from '../../redux/authReducer'
 import { RootStoreType } from '../../redux/store'
 import { Header } from './Header'
 
