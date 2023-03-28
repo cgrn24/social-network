@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import React from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { PostsType } from '../../../redux/state'
 import { maxLengthCreator, required } from '../../../utils/validators/validators'
@@ -15,7 +15,7 @@ type FormDataType = {
   newPostText: string
 }
 export const MyPosts = (props: MyPostsType) => {
-  let postsElements = props.posts.map((p) => <Post message={p.message} likesCount={p.likesCount} />)
+  let postsElements = props.posts.map((p) => <Post message={p.message} likesCount={p.likesCount} id={p.id} />)
   let onAddPost = (values: FormDataType) => {
     props.addPost(values.newPostText)
   }

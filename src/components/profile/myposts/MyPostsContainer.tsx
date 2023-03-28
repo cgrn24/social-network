@@ -1,16 +1,16 @@
-import React, { ChangeEvent } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { addPostAC } from '../../../redux/profileReducer'
-import { ActionsType } from '../../../redux/store'
+import { AppDispatch, RootStoreType } from '../../../redux/store'
 import { MyPosts } from './MyPosts'
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootStoreType) => {
   return {
     posts: state.profilePage.posts,
     newPostText: state.profilePage.newPostText,
   }
 }
-const mapDispatchToProps = (dispatch: (action: ActionsType) => void) => {
+const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     addPost: (newPostText: string) => {
       dispatch(addPostAC(newPostText))
