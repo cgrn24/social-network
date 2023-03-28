@@ -5,12 +5,13 @@ import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom'
 import { DialogsContainer } from './components/dialogs/DialogsContainer'
 import UsersContainer from './components/users/UsersContainer'
 import ProfileContainer from './components/profile/ProfileContainer'
-import HeaderContainer from './components/header/HeaderContainer'
+import { HeaderContainer } from './components/header/HeaderContainer'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { initializeAppTC } from './redux/appReducer'
 import { RootStoreType } from './redux/store'
 import Preloader from './components/common/Preloader/Preloader'
+import Login from './components/login/Login'
 
 type AppPropsType = {
   initializeAppTC: () => void
@@ -32,15 +33,10 @@ class App extends React.Component<AppPropsType> {
           <Navbar />
           <div className='app-wrapper-content'>
             <Switch>
-              <Route path='/profile/:userId?'>
-                <ProfileContainer />
-              </Route>
-              <Route path='/dialogs'>
-                <DialogsContainer />
-              </Route>
-              <Route path='/users'>
-                <UsersContainer />
-              </Route>
+              <Route path={'/profile/:userId?'} render={() => <ProfileContainer />} />
+              <Route path={'/dialogs'} render={() => <DialogsContainer />} />
+              <Route path={'/users'} render={() => <UsersContainer />} />
+              <Route path={'/login'} render={() => <Login />} />
             </Switch>
           </div>
         </div>
@@ -51,6 +47,7 @@ class App extends React.Component<AppPropsType> {
 
 const mapStateToProps = (state: RootStoreType) => ({
   initialized: state.app.initialized,
+  isAuth: state.auth.isAuth,
 })
 
-export default compose<React.ComponentType>(withRouter, connect(mapStateToProps, { initializeAppTC }))(App)
+export default compose<React.ComponentType>(connect(mapStateToProps, { initializeAppTC }), withRouter)(App)

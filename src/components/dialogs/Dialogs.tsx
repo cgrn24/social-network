@@ -25,7 +25,6 @@ export const Dialogs = ({ dialogs, messages, sendMessage, isAuth }: DialogsPageT
   const addNewMessage = (values: FormDataType) => {
     sendMessage(values.newMessageBody)
   }
-  console.log(isAuth)
 
   // if (!isAuth) return <Redirect to={'/login'} />
   return (

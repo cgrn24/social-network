@@ -4,15 +4,19 @@ import { logoutTC } from '../../redux/authReducer'
 import { RootStoreType } from '../../redux/store'
 import { Header } from './Header'
 
-type HeaderContainerPropsType = {
+export type HeaderContainerPropsType = HeaderMSTPPropsType & HeaderMDTPPropsType
+
+type HeaderMSTPPropsType = {
   isAuth: boolean
   login: string | null
+}
+type HeaderMDTPPropsType = {
   logoutTC: () => void
 }
 
-class HeaderContainer extends React.Component<HeaderContainerPropsType> {
+class HeaderContainerConnect extends React.Component<HeaderContainerPropsType> {
   render() {
-    return <Header {...this.props} logout={logoutTC} />
+    return <Header {...this.props} />
   }
 }
 const mapStateToProps = (state: RootStoreType) => {
@@ -22,4 +26,8 @@ const mapStateToProps = (state: RootStoreType) => {
   }
 }
 
-export default connect(mapStateToProps, { logoutTC })(HeaderContainer)
+const mapDispatchToProps: HeaderMDTPPropsType = {
+  logoutTC: logoutTC,
+}
+
+export const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(HeaderContainerConnect)

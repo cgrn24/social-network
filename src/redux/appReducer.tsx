@@ -1,11 +1,6 @@
-import { Dispatch } from 'redux'
-import { initialize, stopSubmit } from 'redux-form'
-import { ThunkDispatch } from 'redux-thunk'
-import { appDispatch } from '..'
-import { authAPI } from '../api/api'
 import { getUserDataTC } from './authReducer'
-import { AppType, AuthType, RootStateType } from './state'
-import { ActionsType, AppThunkType } from './store'
+import { AppType } from './state'
+import { AppThunkType } from './store'
 
 const SET_INITIALIZED = 'SET-INITIALIZED'
 
