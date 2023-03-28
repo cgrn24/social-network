@@ -1,7 +1,12 @@
+import { createSelector } from 'reselect'
 import { RootStoreType } from './../store'
-export const getUsers = (state: RootStoreType) => {
+const getUsersSelector = (state: RootStoreType) => {
   return state.usersPage.users
 }
+
+export const getUsers = createSelector(getUsersSelector, (users) => {
+  return users
+})
 
 export const getPageSize = (state: RootStoreType) => {
   return state.usersPage.pageSize
