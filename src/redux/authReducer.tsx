@@ -34,31 +34,28 @@ export const setUserData = (userId: number | null, email: string | null, login: 
   payload: { userId, email, login, isAuth },
 })
 
-export const getUserDataTC = (): AppThunkType => (dispatch) => {
-  return authAPI.me().then((res) => {
-    if (res.data.resultCode === 0) {
-      const { id, login, email } = res.data.data
-      dispatch(setUserData(id, email, login, true))
-    }
-  })
+export const getUserDataTC = (): AppThunkType => async (dispatch) => {
+  const res = await authAPI.me()
+  if (res.data.resultCode === 0) {
+    const { id, login, email } = res.data.data
+    dispatch(setUserData(id, email, login, true))
+  }
 }
 
 export const loginTC =
   (email: string, password: string, rememberMe?: boolean): AppThunkType =>
-  (dispatch) => {
-    authAPI.login(email, password, rememberMe).then((res) => {
-      if (res.data.resultCode === 0) {
-        dispatch(getUserDataTC())
-      } else {
-        const message = res.data.messages.lenght > 0 ? res.data.messages[0] : 'Some error'
-        dispatch(stopSubmit('login', { _error: message }))
-      }
-    })
-  }
-export const logoutTC = (): AppThunkType => (dispatch) => {
-  authAPI.logout().then((res) => {
+  async (dispatch) => {
+    const res = await authAPI.login(email, password, rememberMe)
     if (res.data.resultCode === 0) {
-      dispatch(setUserData(null, null, null, false))
+      dispatch(getUserDataTC())
+    } else {
+      const message = res.data.messages.lenght > 0 ? res.data.messages[0] : 'Some error'
+      dispatch(stopSubmit('login', { _error: message }))
     }
-  })
+  }
+export const logoutTC = (): AppThunkType => async (dispatch) => {
+  const res = await authAPI.logout()
+  if (res.data.resultCode === 0) {
+    dispatch(setUserData(null, null, null, false))
+  }
 }
