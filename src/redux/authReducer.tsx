@@ -5,7 +5,7 @@ import { authAPI } from '../api/api'
 import { AuthType, RootStateType } from './state'
 import { AppDispatch, AppThunkType } from './store'
 
-const SET_USER_DATA = 'SET-USER-DATA'
+const SET_USER_DATA = 'auth/SET-USER-DATA'
 
 const initialState = {
   userId: null,
