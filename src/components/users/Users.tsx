@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { UsersType } from '../../redux/usersReducer'
+import { Paginator } from '../common/Paginator/Paginator'
+import User from './User'
 import style from './Users.module.css'
 
 type UsersFCPropsType = {
@@ -18,70 +20,24 @@ type UsersFCPropsType = {
   followingInProgress: number[]
 }
 
-export const Users = (props: UsersFCPropsType) => {
+export const Users = ({ currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props }: UsersFCPropsType) => {
   let pages: number[] = []
 
-  const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+  const pagesCount = Math.ceil(totalUsersCount / pageSize)
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i)
   }
 
   return (
-    <div>
+    <>
       <div>
-        {pages.map((p) => {
-          return (
-            <span className={props.currentPage === p ? style.selectedPage : style.page} onClick={() => props.onPageChanged(p)}>
-              {p}
-            </span>
-          )
-        })}
-      </div>
-      {props.users.map((u) => (
-        <div key={u.id}>
-          <span>
-            <div>
-              <NavLink to={'/profile/' + u.id}>
-                <img
-                  src={u.photos.small ? u.photos.small : 'https://preview.redd.it/1p4pp2ckqh921.png?auto=webp&s=278c8ad3c703299e8fdeff08fc636073361db1d5'}
-                  className={u.photos.small ? undefined : style.avatar}
-                />
-              </NavLink>
-            </div>
-            <div>
-              {u.followed ? (
-                <button
-                  disabled={props.followingInProgress.some((id) => id === u.id)}
-                  onClick={() => {
-                    props.unfollowTC(u.id)
-                  }}
-                >
-                  Unfollow
-                </button>
-              ) : (
-                <button
-                  disabled={props.followingInProgress.some((id) => id === u.id)}
-                  onClick={() => {
-                    props.followTC(u.id)
-                  }}
-                >
-                  Follow
-                </button>
-              )}
-            </div>
-          </span>
-          <span>
-            <span>
-              <div>{u.name}</div>
-              <div>{u.status}</div>
-            </span>
-            <span>
-              <div>'u.location.country'</div>
-              <div>'u.location.city'</div>
-            </span>
-          </span>
+        <Paginator currentPage={currentPage} onPageChanged={onPageChanged} totalUsersCount={totalUsersCount} pageSize={pageSize} />
+        <div>
+          {users.map((u) => (
+            <User user={u} followingInProgress={props.followingInProgress} key={u.id} unfollow={props.unfollow} follow={props.follow} />
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </>
   )
 }
