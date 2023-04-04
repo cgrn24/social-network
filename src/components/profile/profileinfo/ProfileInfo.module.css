@@ -1,6 +1,9 @@
 .descriptionBlock {
-    padding: 10px;
+  padding: 10px;
 }
 .infoBlock img {
-    max-width: 1000px;
+  max-width: 1000px;
+}
+.mainPhoto {
+  max-width: 200px;
 }

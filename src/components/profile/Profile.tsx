@@ -10,12 +10,14 @@ type ProfileComponentType = {
   updateStatus: (status: string) => void
   userId: number
   isAuth: boolean
+  isOwner: boolean
+  savePhoto: (photoFile: any) => void
 }
 
 export const Profile = (props: ProfileComponentType) => {
   return (
     <div>
-      <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} />
+      <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} isOwner={props.isOwner} savePhoto={props.savePhoto} />
       <MyPostsContainer />
     </div>
   )
