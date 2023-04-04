@@ -86,11 +86,14 @@ export const updateUserStatusTC =
 export const savePhotoTC =
   (file: any): AppThunkType =>
   async (dispatch) => {
-    let response = await profileAPI.savePhoto(file)
-
-    if (response.data.resultCode === 0) {
-      debugger
-      dispatch(savePhotoSuccess(response.data.data.photos))
+    try {
+      let response = await profileAPI.savePhoto(file)
+      if (response.data.resultCode === 0) {
+        debugger
+        dispatch(savePhotoSuccess(response.data.data.photos))
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 
