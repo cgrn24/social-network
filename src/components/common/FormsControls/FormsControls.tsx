@@ -1,3 +1,4 @@
+import { Field } from 'formik'
 import { DetailedHTMLProps, FC, InputHTMLAttributes, ReactNode } from 'react'
 import { WrappedFieldMetaProps, WrappedFieldProps } from 'redux-form'
 import style from './FormsControls.module.css'
@@ -33,4 +34,17 @@ export const Input: FC<WrappedFieldProps> = (props) => {
       <input {...input} {...restProps} />
     </FormControl>
   )
+}
+export const createField = <D,>(name: string, component: FC<D>, restProps?: FormPropsType, text?: string) => {
+  return (
+    <div>
+      <Field component={component} name={name} {...restProps} /> <span>{text}</span>
+    </div>
+  )
+}
+
+type FormPropsType = {
+  type?: string
+  validate?: Array<Function>
+  placeholder?: string
 }

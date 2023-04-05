@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { AuthRedirect } from '../../hoc/AuthRedirect'
-import { getUserProfileTC, getUserStatusTC, savePhotoTC, updateUserStatusTC } from '../../redux/profileReducer'
+import { getUserProfileTC, getUserStatusTC, savePhotoTC, saveProfile, updateUserStatusTC } from '../../redux/profileReducer'
 import { ProfileType } from '../../redux/state'
 import { RootStoreType } from '../../redux/store'
 import { Profile } from './Profile'
@@ -17,6 +17,7 @@ type OwnPropsType = {
   getUserStatusTC: (userId: number) => void
   updateUserStatusTC: (status: string) => void
   savePhotoTC: (file: any) => void
+  saveProfile: (profile: ProfileType) => void
   profile: ProfileType
   status: string
   userId: number
@@ -54,6 +55,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
           updateStatus={this.props.updateUserStatusTC}
           isOwner={!this.props.match.params.userId}
           savePhoto={this.props.savePhotoTC}
+          saveProfile={this.props.saveProfile}
         />
       </div>
     )
@@ -69,7 +71,7 @@ const mapStateToProps = (state: RootStoreType) => {
 }
 
 export default compose<React.ComponentType>(
-  connect(mapStateToProps, { getUserProfileTC, getUserStatusTC, updateUserStatusTC, savePhotoTC }),
+  connect(mapStateToProps, { getUserProfileTC, getUserStatusTC, updateUserStatusTC, savePhotoTC, saveProfile }),
   withRouter,
   AuthRedirect
 )(ProfileContainer)

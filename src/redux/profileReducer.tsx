@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux'
+import { stopSubmit } from 'redux-form'
 import { profileAPI, usersApi } from '../api/api'
-import { ProfilePageType } from './state'
+import { ProfilePageType, ProfileType } from './state'
 import { AppThunkType } from './store'
 
 const ADD_POST = 'ADD-POST'
@@ -94,6 +95,21 @@ export const savePhotoTC =
       }
     } catch (err) {
       console.log(err)
+    }
+  }
+
+export const saveProfile =
+  (profile: ProfileType): AppThunkType =>
+  async (dispatch, getState) => {
+    const userId = getState().auth.userId
+    const response = await profileAPI.saveProfile(profile)
+    if (userId) {
+      if (response.data.resultCode === 0) {
+        dispatch(getUserProfileTC(userId))
+      } else {
+        dispatch(stopSubmit('edit-profile', { _error: response.data.messages[0] }))
+        return Promise.reject(response.data.messages[0])
+      }
     }
   }
 
