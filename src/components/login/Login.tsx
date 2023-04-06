@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { Input } from '../common/FormsControls/FormsControls'
 import { required } from '../../utils/validators/validators'
@@ -12,19 +12,27 @@ type FormDataType = {
   email: string
   password: string
   rememberMe: boolean
+  captcha: string
 }
 
 type LoginMDTPType = {
-  loginTC: (email: string, password: string, rememberMe?: boolean) => void
+  loginTC: (email: string, password: string, rememberMe?: boolean, captcha?: string) => void
 }
 
 type LoginMSTPType = {
   isAuth: boolean
+  captcha: string | null
 }
 
 type LoginPropsType = LoginMDTPType & LoginMSTPType
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+type LoginFormOwnProps = {
+  captcha: string | null
+}
+
+type NewType = FC<InjectedFormProps<FormDataType, LoginFormOwnProps> & LoginFormOwnProps>
+
+const LoginForm: NewType = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -44,11 +52,11 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
   )
 }
 
-const LoginReduxForm = reduxForm<FormDataType>({ form: 'login' })(LoginForm)
+const LoginReduxForm = reduxForm<FormDataType, LoginFormOwnProps>({ form: 'login' })(LoginForm)
 
 const Login = (props: LoginPropsType) => {
   const onSubmit = (formData: FormDataType) => {
-    props.loginTC(formData.email, formData.password, formData.rememberMe)
+    props.loginTC(formData.email, formData.password, formData.rememberMe, formData.captcha)
   }
 
   if (props.isAuth) {
@@ -58,12 +66,13 @@ const Login = (props: LoginPropsType) => {
   return (
     <div>
       <h1>Login</h1>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <LoginReduxForm onSubmit={onSubmit} captcha={props.captcha} />
     </div>
   )
 }
 const mapStateToProps = (state: RootStoreType) => ({
   isAuth: state.auth.isAuth,
+  captcha: state.auth.captcha,
 })
 
 export default connect(mapStateToProps, { loginTC })(Login)
