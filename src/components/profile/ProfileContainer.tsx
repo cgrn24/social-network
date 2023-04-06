@@ -17,7 +17,7 @@ type OwnPropsType = {
   getUserStatusTC: (userId: number) => void
   updateUserStatusTC: (status: string) => void
   savePhotoTC: (file: any) => void
-  saveProfile: (profile: ProfileType) => void
+  saveProfile: (value: Omit<ProfileType, 'userId' | 'photos'>) => Promise<any>
   profile: ProfileType
   status: string
   userId: number

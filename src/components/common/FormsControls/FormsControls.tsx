@@ -1,6 +1,6 @@
-import { Field } from 'formik'
-import { DetailedHTMLProps, FC, InputHTMLAttributes, ReactNode } from 'react'
-import { WrappedFieldMetaProps, WrappedFieldProps } from 'redux-form'
+import { FC, ReactNode } from 'react'
+import { Field, WrappedFieldMetaProps, WrappedFieldProps } from 'redux-form'
+import { FieldValidatorType } from '../../../utils/validators/validators'
 import style from './FormsControls.module.css'
 
 type FormControlPropsType = {
@@ -35,16 +35,20 @@ export const Input: FC<WrappedFieldProps> = (props) => {
     </FormControl>
   )
 }
-export const createField = <D,>(name: string, component: FC<D>, restProps?: FormPropsType, text?: string) => {
+export function createField<FormKeysType extends string>(
+  placeholder: string | undefined,
+  name: FormKeysType,
+  validators: Array<FieldValidatorType>,
+  component: React.FC<WrappedFieldProps>,
+  props = {},
+  text = ''
+) {
   return (
     <div>
-      <Field component={component} name={name} {...restProps} /> <span>{text}</span>
+      <Field component={component} name={name} placeholder={placeholder} validate={validators} {...props} />
+      {text}
     </div>
   )
 }
 
-type FormPropsType = {
-  type?: string
-  validate?: Array<Function>
-  placeholder?: string
-}
+export type GetStringKeys<T> = Extract<keyof T, string>

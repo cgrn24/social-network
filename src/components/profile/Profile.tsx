@@ -12,7 +12,7 @@ type ProfileComponentType = {
   isAuth: boolean
   isOwner: boolean
   savePhoto: (photoFile: any) => void
-  saveProfile: (profile: ProfileType) => void
+  saveProfile: (value: Omit<ProfileType, 'userId' | 'photos'>) => Promise<any>
 }
 
 export const Profile = (props: ProfileComponentType) => {
