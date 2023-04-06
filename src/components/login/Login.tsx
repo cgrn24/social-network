@@ -44,6 +44,8 @@ const LoginForm: NewType = (props) => {
       <div>
         <Field component={Input} name={'rememberMe'} type={'checkbox'} /> remember me
       </div>
+      {props.captcha && <img src={props.captcha} alt='captcha' />}
+      {props.captcha && <Field component={Input} name={'captcha'} placeholder={'Symbols from image'} validate={[required]} />}
       {props.error && <div className={style.formSummaryError}>{props.error}</div>}
       <div>
         <button>Login</button>
