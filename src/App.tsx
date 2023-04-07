@@ -34,12 +34,13 @@ class App extends React.Component<AppPropsType> {
           <HeaderContainer />
           <Navbar />
           <div className='app-wrapper-content'>
-            {/* <Switch> */}
-            <Route path={'/profile/:userId?'} render={() => <ProfileContainer />} />
-            <Route path={'/dialogs'} render={() => <DialogsContainer />} />
-            <Route path={'/users'} render={() => <UsersContainer />} />
-            <Route path={'/login'} render={() => <Login />} />
-            {/* </Switch> */}
+            <Switch>
+              <Route path={'/profile/:userId?'} render={() => <ProfileContainer />} />
+              <Route path={'/dialogs'} render={() => <DialogsContainer />} />
+              <Route path={'/users'} render={() => <UsersContainer />} />
+              <Route path={'/login'} render={() => <Login />} />
+              <Route path={'*'} render={() => <div>404 not found</div>} />
+            </Switch>
           </div>
         </div>
       </BrowserRouter>
