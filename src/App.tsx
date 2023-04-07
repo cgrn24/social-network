@@ -35,6 +35,7 @@ class App extends React.Component<AppPropsType> {
           <Navbar />
           <div className='app-wrapper-content'>
             <Switch>
+              <Route exact path={'/'} render={() => <ProfileContainer />} />
               <Route path={'/profile/:userId?'} render={() => <ProfileContainer />} />
               <Route path={'/dialogs'} render={() => <DialogsContainer />} />
               <Route path={'/users'} render={() => <UsersContainer />} />
