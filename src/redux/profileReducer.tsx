@@ -77,11 +77,15 @@ export const getUserStatusTC =
 export const updateUserStatusTC =
   (status: string): AppThunkType =>
   (dispatch) => {
-    profileAPI.updateStatus(status).then((res) => {
-      if (res.data.resultCode === 0) {
-        dispatch(setStatusAC(status))
-      }
-    })
+    try {
+      profileAPI.updateStatus(status).then((res) => {
+        if (res.data.resultCode === 0) {
+          dispatch(setStatusAC(status))
+        }
+      })
+    } catch (e) {
+      console.log(e)
+    }
   }
 
 export const savePhotoTC =
@@ -93,8 +97,8 @@ export const savePhotoTC =
         debugger
         dispatch(savePhotoSuccess(response.data.data.photos))
       }
-    } catch (err) {
-      console.log(err)
+    } catch (e) {
+      console.log(e)
     }
   }
 

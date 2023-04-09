@@ -28,6 +28,8 @@ export const setInitializedAC = () => ({
   initialized: true,
 })
 export const initializeAppTC = (): AppThunkType => async (dispatch) => {
-  dispatch(getUserDataTC())
-  dispatch(setInitializedAC())
+  const promise = dispatch(getUserDataTC())
+  Promise.all([promise]).then(() => {
+    dispatch(setInitializedAC())
+  })
 }
