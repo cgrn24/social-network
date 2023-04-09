@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
-import { DialogsType, MessagesType } from '../../redux/state'
+import { DialogsType, MessagesType } from '../../redux/types'
 import { maxLengthCreator, required } from '../../utils/validators/validators'
 import { Textarea } from '../common/FormsControls/FormsControls'
 import { DialogItem } from './DialogItem/DialogItem'

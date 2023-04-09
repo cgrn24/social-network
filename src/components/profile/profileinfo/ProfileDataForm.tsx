@@ -1,19 +1,18 @@
 import { FC } from 'react'
 import { InjectedFormProps, reduxForm } from 'redux-form'
-import { ProfileType, ProfileTypeWN } from '../../../redux/state'
+import { ProfileType } from '../../../redux/types'
 import { createField, Input, Textarea } from '../../common/FormsControls/FormsControls'
 import { FormDataFullType } from './ProfileInfo'
 
 type ProfileDataFormType = {
-  profile: ProfileTypeWN
+  profile: ProfileType
 }
 const ProfileDataForm: FC<InjectedFormProps<FormDataFullType, ProfileDataFormType> & ProfileDataFormType> = ({ profile, handleSubmit, ...props }) => {
+  console.log(profile)
+
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <button>save</button>
-      </div>
-      {/*   {error & <div style={{ color: "red" }}>{error}</div>} */}
+      {props.error && <div style={{ color: 'red' }}>{props.error}</div>}
       <b>Full Name :</b>
       {createField(profile.fullName, 'fullName', [], Input)}
 
@@ -24,6 +23,9 @@ const ProfileDataForm: FC<InjectedFormProps<FormDataFullType, ProfileDataFormTyp
       <p>
         <b>Looking for a job description: </b>
         {createField('Are you looking for a job?', 'lookingForAJobDescription', [], Textarea, { type: 'checkbox' })}
+      </p>
+      <p>
+        <b>About me:</b> {createField('About me', 'aboutMe', [], Input)}
       </p>
       <div>
         <b>Contacts:</b>
@@ -66,6 +68,9 @@ const ProfileDataForm: FC<InjectedFormProps<FormDataFullType, ProfileDataFormTyp
           <b>MainLink:</b>
           {createField(profile.contacts.mainLink ?? 'Main link', 'mainLink', [], Input)}
         </p>
+        <div>
+          <button>save</button>
+        </div>
       </div>
     </form>
   )

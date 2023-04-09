@@ -1,5 +1,5 @@
 import { getUserDataTC } from './authReducer'
-import { AppType } from './state'
+import { AppType } from './types'
 import { AppThunkType } from './store'
 
 const SET_INITIALIZED = 'SET-INITIALIZED'

@@ -13,11 +13,11 @@ type UserPropsType = {
 
 export const User = ({ user, followingInProgress, unfollow, follow }: UserPropsType) => {
   return (
-    <div>
-      <span>
+    <div className={styles.userContainer}>
+      <div className={styles.avatarBlock}>
         <div>
           <NavLink to={'/profile/' + user.id}>
-            <img src={user.photos.small != null ? user.photos.small : userPhoto} className={styles.userPhoto} />
+            <img src={user.photos.small != null ? user.photos.small : userPhoto} className={styles.avatar} />
           </NavLink>
         </div>
         <div>
@@ -41,17 +41,15 @@ export const User = ({ user, followingInProgress, unfollow, follow }: UserPropsT
             </button>
           )}
         </div>
-      </span>
-      <span>
-        <span>
-          <div>{user.name}</div>
-          <div>{user.status}</div>
-        </span>
-        <span>
-          <div>{'user.location.country'}</div>
-          <div>{'user.location.city'}</div>
-        </span>
-      </span>
+      </div>
+      <div className={styles.infoBlock}>
+        <div>
+          <b>Name:</b> {user.name}
+        </div>
+        <div>
+          <b>Status:</b> {user.status}
+        </div>
+      </div>
     </div>
   )
 }

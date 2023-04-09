@@ -1,10 +1,29 @@
+.usersContainer {
+  padding-left: 20px;
+  padding-top: 20px;
+}
 .avatar {
   width: 100px;
-  height: 200px;
+  height: 100px;
+  border-radius: 50px;
 }
 .selectedPage {
   font-weight: bold;
 }
 stylePage {
   font-weight: 400;
+}
+.avatarBlock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  width: 100px;
+}
+.userContainer {
+  display: flex;
+  margin-bottom: 10px;
+}
+.infoBlock {
+  padding-left: 20px;
 }

@@ -1,11 +1,11 @@
 import React from 'react'
-import { ProfileType } from '../../redux/state'
+import { ProfileType } from '../../redux/types'
 import { MyPostsContainer } from './myposts/MyPostsContainer'
 import p from './Profile.module.css'
 import { ProfileInfo } from './profileinfo/ProfileInfo'
 
 type ProfileComponentType = {
-  profile: ProfileType
+  profile: ProfileType | null
   status: string
   updateStatus: (status: string) => void
   userId: number
@@ -17,15 +17,17 @@ type ProfileComponentType = {
 
 export const Profile = (props: ProfileComponentType) => {
   return (
-    <div>
-      <ProfileInfo
-        profile={props.profile}
-        status={props.status}
-        updateStatus={props.updateStatus}
-        isOwner={props.isOwner}
-        savePhoto={props.savePhoto}
-        saveProfile={props.saveProfile}
-      />
+    <div className={p.content}>
+      <div className={p.profileTop}>
+        <ProfileInfo
+          profile={props.profile}
+          status={props.status}
+          updateStatus={props.updateStatus}
+          isOwner={props.isOwner}
+          savePhoto={props.savePhoto}
+          saveProfile={props.saveProfile}
+        />
+      </div>
       <MyPostsContainer />
     </div>
   )

@@ -1,4 +1,4 @@
-import { DialogsPageType } from './state'
+import { DialogsPageType } from './types'
 
 const SEND_MESSAGE = 'SEND_MESSAGE'
 

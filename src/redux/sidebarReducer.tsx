@@ -1,4 +1,4 @@
-import { SidebarType } from './state'
+import { SidebarType } from './types'
 
 let initialState = {
   friendsData: [

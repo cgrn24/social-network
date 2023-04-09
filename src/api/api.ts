@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ProfileType } from '../redux/state'
+import { ProfileType } from '../redux/types'
 
 const instance = axios.create({
   withCredentials: true,
@@ -42,7 +42,7 @@ export const profileAPI = {
       },
     })
   },
-  saveProfile(profile: ProfileType) {
+  saveProfile(profile: ProfileType | null) {
     return instance.put(`profile`, profile)
   },
 }

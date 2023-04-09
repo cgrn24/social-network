@@ -2,7 +2,7 @@ import { Dispatch } from 'redux'
 import { stopSubmit } from 'redux-form'
 import { ThunkDispatch } from 'redux-thunk'
 import { authAPI, securityAPI } from '../api/api'
-import { AuthType, RootStateType } from './state'
+import { AuthType, RootStateType } from './types'
 import { AppDispatch, AppThunkType } from './store'
 
 const SET_USER_DATA = 'auth/SET-USER-DATA'

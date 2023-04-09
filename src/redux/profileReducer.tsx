@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux'
 import { stopSubmit } from 'redux-form'
 import { profileAPI, usersApi } from '../api/api'
-import { ProfilePageType, ProfileType } from './state'
+import { ProfilePageType, ProfileType } from './types'
 import { AppThunkType } from './store'
 
 const ADD_POST = 'ADD-POST'

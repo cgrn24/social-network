@@ -4,7 +4,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { AuthRedirect } from '../../hoc/AuthRedirect'
 import { getUserProfileTC, getUserStatusTC, savePhotoTC, saveProfile, updateUserStatusTC } from '../../redux/profileReducer'
-import { ProfileType } from '../../redux/state'
+import { ProfileType } from '../../redux/types'
 import { RootStoreType } from '../../redux/store'
 import { Profile } from './Profile'
 
@@ -18,7 +18,7 @@ type OwnPropsType = {
   updateUserStatusTC: (status: string) => void
   savePhotoTC: (file: any) => void
   saveProfile: (value: Omit<ProfileType, 'userId' | 'photos'>) => Promise<any>
-  profile: ProfileType
+  profile: ProfileType | null
   status: string
   userId: number
   isAuth: boolean

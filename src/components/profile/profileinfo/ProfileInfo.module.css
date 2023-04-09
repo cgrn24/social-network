@@ -3,9 +3,38 @@
 }
 
 .mainPhoto {
-  max-width: 200px;
+  max-width: 100px;
+  border-radius: 50px;
+  padding-bottom: 10px;
 }
 
 .contact {
   padding-left: 10px;
+}
+
+.block {
+  display: flex;
+  flex-direction: row;
+  column-gap: 70px;
+}
+.photoContainer {
+  display: flex;
+  flex-direction: column;
+}
+.statusSpan {
+  font-weight: bold;
+  margin-right: 10px;
+}
+.statusBlock {
+  display: flex;
+  padding-top: 10px;
+}
+form,
+.form-fields {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.infoField {
+  padding-bottom: 10px;
 }
