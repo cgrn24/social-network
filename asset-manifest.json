@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/socnet/static/css/main.4e74d1d5.css",
+    "main.js": "/socnet/static/js/main.562e4a24.js",
+    "static/media/ava.jpg": "/socnet/static/media/ava.9e2eb1c540ca5d341d2a.jpg",
+    "index.html": "/socnet/index.html",
+    "main.4e74d1d5.css.map": "/socnet/static/css/main.4e74d1d5.css.map",
+    "main.562e4a24.js.map": "/socnet/static/js/main.562e4a24.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4e74d1d5.css",
+    "static/js/main.562e4a24.js"
+  ]
+}
