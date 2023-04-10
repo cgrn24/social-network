@@ -7,6 +7,7 @@ import { loginTC } from '../../redux/authReducer'
 import { Redirect } from 'react-router-dom'
 import style from './../common/FormsControls/FormsControls.module.css'
 import { RootStoreType } from '../../redux/store'
+import s from './Login.module.css'
 
 type FormDataType = {
   email: string
@@ -66,7 +67,7 @@ const Login = (props: LoginPropsType) => {
   }
 
   return (
-    <div>
+    <div className={s.loginContainer}>
       <h1>Login</h1>
       <LoginReduxForm onSubmit={onSubmit} captcha={props.captcha} />
     </div>

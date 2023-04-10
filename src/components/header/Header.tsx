@@ -5,7 +5,6 @@ import { HeaderContainerPropsType } from './HeaderContainer'
 export const Header = (props: HeaderContainerPropsType) => {
   return (
     <header className={h.header}>
-      <img src='https://i.ytimg.com/vi/DE4OxdPJTCM/maxresdefault.jpg'></img>
       <div className={h.loginBlock}>
         {props.isAuth ? (
           <div>

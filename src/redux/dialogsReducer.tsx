@@ -4,15 +4,15 @@ const SEND_MESSAGE = 'SEND_MESSAGE'
 
 let initialState = {
   dialogs: [
-    { id: 1, name: 'Zhmykh' },
+    { id: 1, name: 'Martin' },
     { id: 2, name: 'Valera' },
-    { id: 3, name: 'Pozhiloy' },
+    { id: 3, name: 'Alex' },
     { id: 4, name: 'Arsen' },
   ],
   messages: [
     { id: 1, message: 'Hi' },
-    { id: 2, message: 'How are you? Havaesh?' },
-    { id: 3, message: 'Yopta' },
+    { id: 2, message: 'How are you?' },
+    { id: 3, message: 'What is going on?' },
   ],
 }
 

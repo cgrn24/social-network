@@ -12,8 +12,8 @@ const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
 
 let initialState = {
   posts: [
-    { id: 1, message: 'Hi, havayu', likesCount: 12 },
-    { id: 2, message: 'Its my first yopta?', likesCount: 9 },
+    { id: 1, message: 'Hi, how are you?', likesCount: 12 },
+    { id: 2, message: 'Not so test message', likesCount: 9 },
   ],
   newPostText: '',
   profile: null,
