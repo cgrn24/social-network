@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import { Navbar } from './components/navbar/Navbar'
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Route, Switch, withRouter } from 'react-router-dom'
 import { DialogsContainer } from './components/dialogs/DialogsContainer'
 import UsersContainer from './components/users/UsersContainer'
 import ProfileContainer from './components/profile/ProfileContainer'
@@ -29,7 +29,7 @@ class App extends React.Component<AppPropsType> {
     }
 
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div className='app-wrapper'>
           <HeaderContainer />
           <Navbar />
@@ -44,7 +44,7 @@ class App extends React.Component<AppPropsType> {
             </Switch>
           </div>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     )
   }
 }
