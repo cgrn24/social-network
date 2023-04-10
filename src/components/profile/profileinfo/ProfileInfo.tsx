@@ -56,7 +56,9 @@ export const ProfileInfo: FC<ProfileInfoType> = ({ profile, status, isOwner, sav
   return (
     <div className={s.block}>
       <div className={s.photoContainer}>
-        <img src={profile.photos.large || logo} alt='avatar' className={s.mainPhoto} />
+        <div className={s.photoBlock}>
+          <img src={profile.photos.large || logo} alt='avatar' className={s.mainPhoto} />
+        </div>
         {isOwner && <input type={'file'} onChange={onMainPhotoUpdate}></input>}
         <div className={s.statusBlock}>
           <span className={s.statusSpan}>Status:</span>
