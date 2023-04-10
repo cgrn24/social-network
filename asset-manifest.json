@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/socnet/static/css/main.4e74d1d5.css",
-    "main.js": "/socnet/static/js/main.562e4a24.js",
-    "static/media/ava.jpg": "/socnet/static/media/ava.9e2eb1c540ca5d341d2a.jpg",
-    "index.html": "/socnet/index.html",
-    "main.4e74d1d5.css.map": "/socnet/static/css/main.4e74d1d5.css.map",
-    "main.562e4a24.js.map": "/socnet/static/js/main.562e4a24.js.map"
+    "main.css": "/social-network/static/css/main.4e74d1d5.css",
+    "main.js": "/social-network/static/js/main.0652133f.js",
+    "static/media/ava.jpg": "/social-network/static/media/ava.9e2eb1c540ca5d341d2a.jpg",
+    "index.html": "/social-network/index.html",
+    "main.4e74d1d5.css.map": "/social-network/static/css/main.4e74d1d5.css.map",
+    "main.0652133f.js.map": "/social-network/static/js/main.0652133f.js.map"
   },
   "entrypoints": [
     "static/css/main.4e74d1d5.css",
-    "static/js/main.562e4a24.js"
+    "static/js/main.0652133f.js"
   ]
 }
