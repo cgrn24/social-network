@@ -1,4 +1,3 @@
-import { Dispatch } from 'redux'
 import { usersApi } from '../api/api'
 import { updateObjectInArray } from '../utils/object-helpers'
 import { AppThunkType } from './store'

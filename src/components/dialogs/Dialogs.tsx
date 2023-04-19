@@ -1,5 +1,4 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { DialogsType, MessagesType } from '../../redux/types'
 import { maxLengthCreator, required } from '../../utils/validators/validators'
@@ -27,7 +26,6 @@ export const Dialogs = ({ dialogs, messages, sendMessage, isAuth }: DialogsPageT
   }
   console.log(isAuth)
 
-  // if (!isAuth) return <Redirect to={'/login'} />
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>

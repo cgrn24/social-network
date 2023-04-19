@@ -1,4 +1,3 @@
-import { Dispatch } from 'redux'
 import { stopSubmit } from 'redux-form'
 import { profileAPI, usersApi } from '../api/api'
 import { ProfilePageType, ProfileType } from './types'
@@ -38,7 +37,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
       return { ...state, status: action.status }
     }
     case DELETE_POST:
-      return { ...state, posts: state.posts.filter((p) => p.id != action.postId) }
+      return { ...state, posts: state.posts.filter((p) => p.id !== action.postId) }
     case SAVE_PHOTO_SUCCESS:
       return { ...state, profile: { ...state.profile, photos: action.photos } }
     default:

@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom'
 import { UsersType } from '../../redux/usersReducer'
 import { Paginator } from '../common/Paginator/Paginator'
 import User from './User'

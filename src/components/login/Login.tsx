@@ -55,7 +55,9 @@ const LoginForm: NewType = (props) => {
   )
 }
 
-const LoginReduxForm = reduxForm<FormDataType, LoginFormOwnProps>({ form: 'login' })(LoginForm)
+const LoginReduxForm = reduxForm<FormDataType, LoginFormOwnProps>({ form: 'login', initialValues: { email: 'free@samuraijs.com', password: 'free' } })(
+  LoginForm
+)
 
 const Login = (props: LoginPropsType) => {
   const onSubmit = (formData: FormDataType) => {

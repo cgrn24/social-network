@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import { Navbar } from './components/navbar/Navbar'
-import { BrowserRouter, HashRouter, Route, Switch, withRouter } from 'react-router-dom'
+import { HashRouter, Route, Switch, withRouter } from 'react-router-dom'
 import { DialogsContainer } from './components/dialogs/DialogsContainer'
 import UsersContainer from './components/users/UsersContainer'
 import ProfileContainer from './components/profile/ProfileContainer'
